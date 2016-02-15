@@ -1,7 +1,12 @@
 [init]
   templatedir = ~/.git_template
 [push]
-  default = current
+  default = upstream
+[pull]
+  rebase = true
+[user]
+  name = Marcel Hild
+  email = hild@b4mad.net
 [color]
   ui = auto
 [alias]
@@ -12,9 +17,31 @@
   co = checkout
   pf = push --force-with-lease
   st = status
+  lol = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" 
+  sla = log --oneline --decorate --graph --all
+  glog = log -E -i --grep
+  mup = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -
+  origin = rev-parse --abbrev-ref --symbolic-full-name @{u}
+  oreset = !git origin && git reset --hard $(git origin)
+  rio = !git rebase -i $(git origin)
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+  pager = less -x4
+[pager]
+    log = diff-highlight | less -x4
+    show = diff-highlight | less -x4
+    diff = diff-highlight | less -x4
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+[color "diff-highlight"]
+    oldNormal = "red"
+    oldHighlight = "160 52"
+    newNormal = "green"
+    newHighlight = "118 22"
 [merge]
   ff = only
 [commit]

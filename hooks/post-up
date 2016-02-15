@@ -2,11 +2,20 @@
 
 touch "$HOME"/.psqlrc.local
 
-if [ ! -e "$HOME"/.vim/autoload/plug.vim ]; then
-  curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#if [ ! -e "$HOME"/.vim/autoload/plug.vim ]; then
+#  curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
+#      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#fi
+#vim -u "$HOME"/.vimrc.bundles +PlugInstall +PlugClean! +qa
+
+if [ ! -e ~/.fzf ]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
 fi
-vim -u "$HOME"/.vimrc.bundles +PlugInstall +PlugClean! +qa
+
+if [ ! -e ~/.git-aliae ]; then
+  git clone --depth 1 https://github.com/ConradIrwin/git-aliae.git ~/.git-aliae
+fi
 
 # detect old OS X broken /etc/zshenv and suggest rename
 if grep -qw path_helper /etc/zshenv 2>/dev/null; then

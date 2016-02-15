@@ -1,3 +1,38 @@
+[[ -d ~/.zplug ]] || {
+  curl -fLo ~/.zplug/zplug --create-dirs https://git.io/zplug
+  source ~/.zplug/zplug && zplug update --self
+}
+source ~/.zplug/zplug
+
+# Make sure to use double quotes to prevent shell expansion
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "felixr/docker-zsh-completion", nice:10
+zplug "zsh-users/zsh-completions", nice:10
+#zplug "plugins/bundler",    from:oh-my-zsh, as:plugin
+#zplug 'Tarrasch/zsh-autoenv'
+zplug "b4b4r07/enhancd", of:enhancd.sh
+ENHANCD_DISABLE_HYPHEN=1
+ENHANCD_DISABLE_DOT=1
+zplug "supercrabtree/k"
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+
+# Install plugins that have not been installed yet
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
+fi
+
+zplug load
+
+# use vim as the visual editor
+export VISUAL='vim'
+export EDITOR=$VISUAL
+
 # load custom executable functions
 for function in ~/.zsh/functions/*; do
   source $function
@@ -39,8 +74,18 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
+ensure_tmux_is_running
+
+zstyle ':completion:*' menu select
+
+# binds Ctrl-T, Alt-C, Ctrl-R
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# added by travis gem
+[ -f /home/hild/.travis/travis.sh ] && source /home/hild/.travis/travis.sh

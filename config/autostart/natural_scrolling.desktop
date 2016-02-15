@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=/bin/zsh -c --login "/home/hild/.bin/natural_scrolling.rb 'Logitech|TrackPoint'"
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[en_US]=Enable Natural Scrolling
+Name=Natural Scrolling Enabler
+Comment[en_US]=Enables Natural Scrolling in X.
+Comment=Enables Natural Scrolling in X.

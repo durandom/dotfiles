@@ -7,13 +7,26 @@ alias v="$VISUAL"
 
 # Bundler
 alias b="bundle"
-
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
-alias s="rspec"
+alias be="bundle exec"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
+
+#alias docker="sudo /usr/bin/docker"
+#if [[ `uname` == 'Linux' ]]
+#then
+#  alias open="xdg-open"
+#fi
+
+# Use `hub` as our git wrapper:
+#hub_path=$(which hub)
+#if (( $+commands[hub] ))
+#then
+#  alias git=$hub_path
+#fi
+#alias g=git
+alias git=hub
+
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local

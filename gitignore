@@ -10,3 +10,8 @@ tags
 tmp/**/*
 !tmp/cache/.keep
 *.pyc
+*~
+# Intellij IDEA
+.idea/
+*.iml
+.gitignore.local
