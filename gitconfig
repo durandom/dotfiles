@@ -1,7 +1,7 @@
 [init]
   templatedir = ~/.git_template
 [push]
-  default = upstream
+  default = current
 [pull]
   rebase = true
 [user]
