@@ -145,6 +145,11 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
+" Common config
+if filereadable($HOME . "/.vimrc.common")
+  source ~/.vimrc.common
+endif
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
