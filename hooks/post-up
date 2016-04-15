@@ -2,11 +2,11 @@
 
 touch "$HOME"/.psqlrc.local
 
-#if [ ! -e "$HOME"/.vim/autoload/plug.vim ]; then
-#  curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
-#      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#fi
-#vim -u "$HOME"/.vimrc.bundles +PlugInstall +PlugClean! +qa
+if [ ! -e "$HOME"/.vim/autoload/plug.vim ]; then
+  curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+vim -u "$HOME"/.vimrc.bundles +PlugInstall +PlugClean! +qa
 
 if [ ! -e ~/.fzf ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

@@ -87,4 +87,4 @@ nnoremap <C-w><C-q> :action CloseContent<CR>
 
 nnoremap <space>vs :source ~/.ideavimrc<CR>
 
-source ~/.vimrc
+source ~/.vimrc.common

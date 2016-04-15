@@ -27,6 +27,8 @@ alias path='echo $PATH | tr -s ":" "\n"'
 #alias g=git
 alias git=hub
 
+alias vi='vimx'
+alias vim='vimx'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
