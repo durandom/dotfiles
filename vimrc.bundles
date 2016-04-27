@@ -47,6 +47,11 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-dispatch'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'majutsushi/tagbar'
+Plug 'vim-ruby/vim-ruby'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
