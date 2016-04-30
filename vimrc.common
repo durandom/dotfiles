@@ -6,12 +6,17 @@ set nobackup
 set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=1000
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
+set ruler
+set showcmd
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set clipboard=unnamedplus
+set relativenumber
 
 " always jump to beginning of line, disregard leading whitespace
 nmap 0 ^
+nmap <leader>s :nohlsearch<cr>:hslsearch<cr>
