@@ -48,16 +48,19 @@ nnoremap <C-j> :action NextSplitter<CR>
 nnoremap <C-K> :action NextSplitter<CR>
 
 " built-in navigation to navigated items works better
-"nnoremap <c-o> :action Back<cr>
-"nnoremap <c-i> :action Forward<cr>
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
 "" but preserve ideavim defaults
-"nnoremap g<c-o> <c-o>
-"nnoremap g<c-i> <c-i>
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
+nnoremap `. :action JumpToLastChange<cr>
 
 " built in search looks better
-" nnoremap / :action Find<cr>
+nnoremap / :action Find<cr>
+nnoremap n :action FindNext<cr>
+nnoremap N :action FindPrevious<cr>
 " but preserve ideavim search
-" nnoremap g/ /
+nnoremap g/ /
 
 " easy system clipboard copy/paste
 noremap <space>y "*y
