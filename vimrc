@@ -138,7 +138,8 @@ endif
 
 " my vim specific stuff (excluding ideavim)
 " RAD config
-nmap <leader>rce :tabedit ~/.vimrc.common<cr>
+" nmap <leader>rce :tabedit ~/.vimrc.common<cr>
+nmap <leader>rce :tabedit $MYVIMRC<cr>
 nmap <leader>rcs :source $MYVIMRC<cr>
 
 " RSpec.vim mappings
@@ -150,6 +151,18 @@ let g:rspec_command = "Dispatch rspec {spec}"
 
 " quit out of help quit
 autocmd Filetype help nnoremap <buffer> q :q<cr>
+
+" cursor gnome-terminal
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")

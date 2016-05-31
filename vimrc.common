@@ -16,6 +16,7 @@ set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set clipboard=unnamedplus
 set norelativenumber
+set updatetime=250
 
 " always jump to beginning of line, disregard leading whitespace
 nmap 0 ^

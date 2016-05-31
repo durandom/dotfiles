@@ -17,7 +17,8 @@
   co = checkout
   pf = push --force-with-lease
   st = status
-  lol = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" 
+  logc = !git --no-pager log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" $(git rev-parse --abbrev-ref HEAD) --not refs/heads/master
+  loga = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\"
   sla = log --oneline --decorate --graph --all
   glog = log -E -i --grep
   mup = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -

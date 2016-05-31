@@ -28,7 +28,12 @@ call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
 Plug 'christoomey/vim-run-interactive'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_command_prefix = 'Fzf'
+nnoremap <leader>f :FzfFiles<CR>
+nnoremap <leader>h :FzfHistory<CR>
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
 Plug 'kchmck/vim-coffee-script'
@@ -52,6 +57,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
 Plug 'vim-ruby/vim-ruby'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/vim-auto-save'
+let g:auto_save = 1 " enable AutoSave on Vim startup
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
