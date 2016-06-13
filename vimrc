@@ -164,6 +164,12 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
+" FZF
+let g:fzf_command_prefix = 'Fzf'
+nnoremap <leader>ff :FzfFiles<CR>
+nnoremap <leader>fb :FzfBuffer<CR>
+nnoremap <leader>fh :FzfHistory<CR>
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
