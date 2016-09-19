@@ -11,5 +11,7 @@ fi
 PATH=".git/safe/../../bin:$PATH"
 
 PATH="$HOME/.git-aliae/bin:$PATH"
+PATH="$HOME/opt/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 
 export -U PATH

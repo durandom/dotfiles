@@ -1,2 +1,2 @@
 #compdef g
-compdef g=git
+compdef g=hub

@@ -17,11 +17,12 @@
   co = checkout
   pf = push --force-with-lease
   st = status
-  logc = !git --no-pager log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" $(git rev-parse --abbrev-ref HEAD) --not refs/heads/master
-  loga = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\"
-  sla = log --oneline --decorate --graph --all
+  lg = log --oneline --decorate --graph
+  lgc = !git --no-pager log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" $(git rev-parse --abbrev-ref HEAD) --not refs/heads/master
+  lga = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\"
   glog = log -E -i --grep
-  mup = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -
+  mupstream = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -
+  mdownstream = !git checkout master && git fetch downstream && git merge downstream/master && git push && git checkout -
   origin = rev-parse --abbrev-ref --symbolic-full-name @{u}
   oreset = !git origin && git reset --hard $(git origin)
   rio = !git rebase -i $(git origin)
@@ -47,6 +48,7 @@
   ff = only
 [commit]
   template = ~/.gitmessage
+  verbose = true
 [fetch]
   prune = true
 [rebase]

@@ -1,5 +1,8 @@
+# binds Ctrl-T, Alt-C, Ctrl-R
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 [[ -d ~/.zplug ]] || {
-  curl -fLo ~/.zplug/zplug --create-dirs https://git.io/zplug
+  curl -sL get.zplug.sh | zsh
   source ~/.zplug/zplug && zplug update --self
 }
 source ~/.zplug/zplug
@@ -10,9 +13,9 @@ zplug "felixr/docker-zsh-completion", nice:10
 zplug "zsh-users/zsh-completions", nice:10
 #zplug "plugins/bundler",    from:oh-my-zsh, as:plugin
 #zplug 'Tarrasch/zsh-autoenv'
-zplug "b4b4r07/enhancd", of:enhancd.sh
 ENHANCD_DISABLE_HYPHEN=1
-ENHANCD_DISABLE_DOT=1
+#ENHANCD_DISABLE_DOT=1
+zplug "durandom/enhancd", at:fix_disable_hyphen, use:init.sh
 zplug "supercrabtree/k"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"
@@ -77,9 +80,6 @@ _load_settings "$HOME/.zsh/configs"
 ensure_tmux_is_running
 
 zstyle ':completion:*' menu select
-
-# binds Ctrl-T, Alt-C, Ctrl-R
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases

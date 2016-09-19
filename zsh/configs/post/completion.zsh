@@ -78,3 +78,7 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
 # completion
 autoload -U compinit
 compinit
+
+
+# aws
+source /usr/bin/aws_zsh_completer.sh
