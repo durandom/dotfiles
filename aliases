@@ -34,5 +34,7 @@ then
   alias pbcopy='xclip -selection c'
 fi
 
+alias spotify-ripper='docker run -ti --rm=true -u=1001 -v ~/Music/spotify/.spotify-ripper:/home/spotifyripper/.spotify-ripper -v `pwd`:/home/spotifyripper/music durandom/sponk'
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local

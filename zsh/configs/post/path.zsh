@@ -4,7 +4,7 @@ PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 PATH="$HOME/.rbenv/bin:$PATH"
 # load rbenv if available
 if command -v rbenv >/dev/null; then
-  eval "$(rbenv init - --no-rehash)"
+  eval "$(rbenv init -)"
 fi
 
 # mkdir .git/safe in the root of repositories you trust
