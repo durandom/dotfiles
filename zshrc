@@ -13,10 +13,11 @@ zplug "felixr/docker-zsh-completion", nice:10
 zplug "zsh-users/zsh-completions", nice:10
 #zplug "plugins/bundler",    from:oh-my-zsh, as:plugin
 #zplug 'Tarrasch/zsh-autoenv'
-#zplug "b4b4r07/enhancd", use:enhancd.sh
 ENHANCD_DISABLE_HYPHEN=1
 ENHANCD_DISABLE_DOT=1
-zplug "durandom/enhancd", at:fix_disable_hyphen, use:init.sh
+ENHANCD_USE_FUZZY_MATCH=0
+zplug "b4b4r07/enhancd", use:init.sh
+#zplug "durandom/enhancd", at:fix_disable_hyphen, use:init.sh
 zplug "supercrabtree/k"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"

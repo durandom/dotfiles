@@ -165,10 +165,10 @@ if has("autocmd")
 endif
 
 " FZF
-let g:fzf_command_prefix = 'Fzf'
-nnoremap <leader>ff :FzfFiles<CR>
-nnoremap <leader>fb :FzfBuffer<CR>
-nnoremap <leader>fh :FzfHistory<CR>
+" let g:fzf_command_prefix = 'Fzf'
+" nnoremap <leader>ff :FzfFiles<CR>
+" nnoremap <leader>fb :FzfBuffer<CR>
+" nnoremap <leader>fh :FzfHistory<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")

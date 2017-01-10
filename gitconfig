@@ -21,6 +21,7 @@
   lgc = !git --no-pager log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\" $(git rev-parse --abbrev-ref HEAD) --not refs/heads/master
   lga = log  --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s\"
   glog = log -E -i --grep
+  gbpurge = !"git fetch --prune --all ; git branch --merged | grep -Ev '\\*|master|dont_rm_this' | xargs -n 1 git branch -d"
   mupstream = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -
   mdownstream = !git checkout master && git fetch downstream && git merge downstream/master && git push && git checkout -
   origin = rev-parse --abbrev-ref --symbolic-full-name @{u}

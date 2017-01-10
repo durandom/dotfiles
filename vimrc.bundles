@@ -29,8 +29,9 @@ call plug#begin('~/.vim/bundle')
 " Define bundles via Github repos
 " Plug 'christoomey/vim-run-interactive'
 " Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+Plug 'Dkendal/fzy-vim'
 Plug 'fatih/vim-go'
 " Plug 'janko-m/vim-test'
 " Plug 'kchmck/vim-coffee-script'
