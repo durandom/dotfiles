@@ -5,3 +5,14 @@ local_hook="$HOME"/.git_template.local/hooks/pre-commit
 if [ -f "$local_hook" ]; then
   . "$local_hook"
 fi
+
+if [ -f .rubocop.yml ]; then
+  if [ -f .git/hooks/pre-commit-rubocop.rb ]; then
+     .git/hooks/pre-commit-rubocop.rb
+     status=$?
+     ls -la
+     if test $status -ne 0; then
+        exit $status
+     fi
+  fi
+fi
