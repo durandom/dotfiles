@@ -10,7 +10,6 @@ if [ -f .rubocop.yml ]; then
   if [ -f .git/hooks/pre-commit-rubocop.rb ]; then
      .git/hooks/pre-commit-rubocop.rb
      status=$?
-     ls -la
      if test $status -ne 0; then
         exit $status
      fi
