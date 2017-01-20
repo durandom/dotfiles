@@ -33,6 +33,10 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+#
+# set pure prompt after zplug load
+PROMPT='%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+setopt PROMPT_SUBST
 
 # use vim as the visual editor
 export VISUAL='vim'
