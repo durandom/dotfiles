@@ -27,6 +27,7 @@
   origin = rev-parse --abbrev-ref --symbolic-full-name @{u}
   oreset = !git origin && git reset --hard $(git origin)
   rio = !git rebase -i $(git origin)
+  unstage = reset HEAD --
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input

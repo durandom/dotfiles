@@ -1,5 +1,8 @@
 #@IgnoreInspection BashAddShebang
 
+# enable colored output from ls, etc. on FreeBSD-based systems
+export CLICOLOR=1
+
 # Pager
 export PAGER=less
 # Less status line

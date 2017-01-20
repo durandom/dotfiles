@@ -32,6 +32,16 @@ is_tmux_runnning() {
     [[ -n $TMUX ]]
 }
 
+_not_inside_tmux() {
+  [[ -z "$TMUX" ]]
+}
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
 # is_screen_or_tmux_running returns true if GNU screen or tmux is running
 is_screen_or_tmux_running() {
     is_screen_running || is_tmux_runnning
@@ -103,4 +113,14 @@ get_os() {
             echo $os
         fi
     done
+}
+
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status
+  fi
 }
