@@ -1,16 +1,10 @@
 # Unix
-alias ll="ls -al"
 alias ln="ln -v"
 alias mkdir="mkdir -p"
-alias e="$EDITOR"
-alias v="$VISUAL"
 
 # Bundler
 alias b="bundle"
 alias be="bundle exec"
-
-# Pretty print the path
-alias path='echo $PATH | tr -s ":" "\n"'
 
 #alias docker="sudo /usr/bin/docker"
 #if [[ `uname` == 'Linux' ]]
@@ -18,17 +12,10 @@ alias path='echo $PATH | tr -s ":" "\n"'
 #  alias open="xdg-open"
 #fi
 
-# Use `hub` as our git wrapper:
-#hub_path=$(which hub)
-#if (( $+commands[hub] ))
-#then
-#  alias git=$hub_path
-#fi
-#alias g=git
-alias git=hub
+# Git
+alias g=git
 
-if [[ `uname` == 'Linux' ]]
-then
+if is_linux; then
   alias vi='vimx'
   alias vim='vimx'
   alias pbcopy='xclip -selection c'

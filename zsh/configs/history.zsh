@@ -13,7 +13,9 @@ esac
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
+# Delete an old recorded event if a new event is a duplicate.
+setopt hist_ignore_all_dups
+setopt hist_save_nodups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history

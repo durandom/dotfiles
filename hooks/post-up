@@ -13,6 +13,10 @@ vim -u "$HOME"/.vimrc.bundles +PlugInstall +PlugClean! +qa
 #  ~/.fzf/install
 #fi
 
+if [ ! -e ~/.zplug ]; then
+  curl -sL zplug.sh/installer | zsh
+fi
+
 if [ ! -e ~/.git-aliae ]; then
   git clone --depth 1 https://github.com/ConradIrwin/git-aliae.git ~/.git-aliae
 fi

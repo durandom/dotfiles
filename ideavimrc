@@ -3,7 +3,7 @@ source ~/.vimrc.common
 nnoremap <leader>rcs :source ~/.ideavimrc<CR>
 nnoremap <leader>rce :edit ~/.ideavimrc<CR>
 
-" https://raw.githubusercontent.com/saaguero/ideavimrc/master/.ideavimrc
+"chttps://raw.githubusercontent.com/saaguero/ideavimrc/master/.ideavimrc
 " https://github.com/melihovv/cfgs/blob/master/editors/vim/.ideavimrc
 " https://raw.githubusercontent.com/expez/dotfiles/031d8e825cc602e57590df5c3caee15357e7d4be/ideavimrc
 
