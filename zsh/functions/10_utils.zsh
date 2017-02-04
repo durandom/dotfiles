@@ -119,8 +119,8 @@ get_os() {
 # With arguments: acts like `git`
 g() {
   if [[ $# -gt 0 ]]; then
-    git "$@"
+    hub "$@"
   else
-    git status
+    hub status
   fi
 }

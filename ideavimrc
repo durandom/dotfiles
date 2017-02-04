@@ -59,11 +59,11 @@ nnoremap g<c-i> <c-i>
 nnoremap `. :action JumpToLastChange<cr>
 
 " built in search looks better
-nnoremap / :action Find<cr>
-nnoremap n :action FindNext<cr>
-nnoremap N :action FindPrevious<cr>
+" nnoremap / :action Find<cr>
+" nnoremap n :action FindNext<cr>
+" nnoremap N :action FindPrevious<cr>
 " but preserve ideavim search
-nnoremap g/ /
+" nnoremap g/ /
 
 " easy system clipboard copy/paste
 noremap <space>y "*y
