@@ -1,8 +1,5 @@
 #@IgnoreInspection BashAddShebang
 
-# binds Ctrl-T, Alt-C, Ctrl-R
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 if [[ -f ~/.zplug/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
   source ~/.zplug/init.zsh
@@ -67,6 +64,9 @@ zstyle ':completion:*' menu select
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# binds Ctrl-T, Alt-C, Ctrl-R
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
 [ -f /home/hild/.travis/travis.sh ] && source /home/hild/.travis/travis.sh
