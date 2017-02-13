@@ -115,12 +115,3 @@ get_os() {
     done
 }
 
-# No arguments: `git status`
-# With arguments: acts like `git`
-g() {
-  if [[ $# -gt 0 ]]; then
-    hub "$@"
-  else
-    hub status
-  fi
-}

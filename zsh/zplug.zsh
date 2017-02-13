@@ -21,7 +21,7 @@ zplug "b4b4r07/zsh-vimode-visual", defer:3
 # completions
 zplug "zsh-users/zsh-completions"
 zplug "felixr/docker-zsh-completion", defer:3
-zplug "glidenote/hub-zsh-completion"
+#zplug "glidenote/hub-zsh-completion"
 zplug 'Valodim/zsh-curl-completion'
 
 zplug "mafredri/zsh-async"
