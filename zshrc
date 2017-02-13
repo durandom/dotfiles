@@ -55,7 +55,7 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
-ensure_tmux_is_running
+#ensure_tmux_is_running
 
 zstyle ':completion:*' menu select
 
