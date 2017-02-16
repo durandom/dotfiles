@@ -2,7 +2,7 @@
 
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
-zplug "b4b4r07/emoji-cli", on:"junegunn/fzf-bin", if:'(( $+commands[jq] ))'
+#zplug "b4b4r07/emoji-cli", on:"junegunn/fzf-bin", if:'(( $+commands[jq] ))'
 
 ENHANCD_DISABLE_HYPHEN=1
 ENHANCD_DISABLE_DOT=1

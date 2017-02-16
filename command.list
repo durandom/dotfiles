@@ -1,0 +1,2 @@
+be rubocop -a 
+be rubocop-git
