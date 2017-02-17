@@ -1,2 +1,3 @@
 be rubocop -a 
 be rubocop-git
+cd ~/src/manageiq ; for i in plugins/manageiq-* ;do cd $i ; echo $fg_bold[red] "- $i -----" $reset_color ; g mupstream; cd - ; done
