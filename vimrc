@@ -48,18 +48,6 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
 " Make it obvious where 80 characters is
 set textwidth=80
 set colorcolumn=+1
@@ -105,7 +93,7 @@ nnoremap <Leader>r :RunInInteractiveShell<space>
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
-" Open new split panes to right and bottom, which feels more natural
+" Open kkw split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
 
@@ -165,10 +153,10 @@ if has("autocmd")
 endif
 
 " FZF
-" let g:fzf_command_prefix = 'Fzf'
-" nnoremap <leader>ff :FzfFiles<CR>
-" nnoremap <leader>fb :FzfBuffer<CR>
-" nnoremap <leader>fh :FzfHistory<CR>
+let g:fzf_command_prefix = 'Fzf'
+nnoremap <leader>ff :FzfFiles<CR>
+nnoremap <leader>fb :FzfBuffer<CR>
+nnoremap <leader>fh :FzfHistory<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")

@@ -3,7 +3,7 @@ source ~/.vimrc.common
 nnoremap <leader>rcs :source ~/.ideavimrc<CR>
 nnoremap <leader>rce :edit ~/.ideavimrc<CR>
 
-"chttps://raw.githubusercontent.com/saaguero/ideavimrc/master/.ideavimrc
+" https://raw.githubusercontent.com/saaguero/ideavimrc/master/.ideavimrc
 " https://github.com/melihovv/cfgs/blob/master/editors/vim/.ideavimrc
 " https://raw.githubusercontent.com/expez/dotfiles/031d8e825cc602e57590df5c3caee15357e7d4be/ideavimrc
 
@@ -11,52 +11,54 @@ nnoremap <leader>rce :edit ~/.ideavimrc<CR>
 set surround
 
 " actions
-nnoremap <c-p> :action SearchEverywhere<cr>
-nnoremap <leader>e :action RecentFiles<cr>
-nnoremap <leader>E :action Switcher<cr>
-nnoremap <leader>t :action FileStructurePopup<cr>
-nnoremap <leader>s :action GotoSymbol<cr>
-nnoremap <leader>c :action GotoClass<cr>
-nnoremap <leader>f :action GotoFile<cr>
-nnoremap <leader>x :action GotoAction<cr>
-nnoremap <leader>b :action ToggleLineBreakpoint<cr>
-nnoremap <leader>h :action TypeHierarchy<cr>
+" nnoremap <c-p> :action SearchEverywhere<cr>
+" nnoremap <leader>e :action RecentFiles<cr>
+" nnoremap <leader>E :action Switcher<cr>
+" nnoremap <leader>t :action FileStructurePopup<cr>
+" nnoremap <leader>s :action GotoSymbol<cr>
+" nnoremap <leader>c :action GotoClass<cr>
+" nnoremap <leader>f :action GotoFile<cr>
+" nnoremap <leader>x :action GotoAction<cr>
+" nnoremap <leader>b :action ToggleLineBreakpoint<cr>
+" nnoremap <leader>h :action TypeHierarchy<cr>
 " does not work well with leader key
 " nnoremap <leader>a :action FindInPath<cr>
 
 " code navigation
-nnoremap <leader>] :action GotoImplementation<cr>
-nnoremap <leader>[ :action GotoSuperMethod<cr>
-nnoremap <leader>u :action FindUsages<cr>
-nnoremap <leader>gt :action GotoTest<cr>
-nnoremap <leader>k :action HighlightUsagesInFile<cr>
-nnoremap \r :action RunClass<cr>
-nnoremap \R :action Run<cr>
-nnoremap \d :action DebugClass<cr>
-nnoremap \D :action Debug<cr>
-nnoremap \c :action CheckStyleCurrentFileAction<cr>
+" nnoremap <leader>] :action GotoImplementation<cr>
+" nnoremap <leader>[ :action GotoSuperMethod<cr>
+" nnoremap <leader>u :action FindUsages<cr>
+" nnoremap <leader>gt :action GotoTest<cr>
+" nnoremap <leader>k :action HighlightUsagesInFile<cr>
+" nnoremap \r :action RunClass<cr>
+" nnoremap \R :action Run<cr>
+" nnoremap \d :action DebugClass<cr>
+" nnoremap \D :action Debug<cr>
+" nnoremap \c :action CheckStyleCurrentFileAction<cr>
+" nnoremap [m :action MethodUp<cr>
+" nnoremap ]m :action MethodDown<cr>
 
 " code refactoring
-nnoremap <leader>rr :action RenameElement<cr>
+" nnoremap <leader>rr :action RenameElement<cr>
 
 " window management
-nnoremap <leader>q :action CloseContent<cr>
-nnoremap <C-w>q :action CloseContent<CR>
-nnoremap <leader>Q :action ReopenClosedTab<cr>
-nnoremap <leader>\ :action VimFilePrevious<cr>
-nnoremap <C-w><C-q> :action CloseContent<CR>
-nnoremap <C-h> :action PreviousTab<CR>
-nnoremap <C-l> :action NextTab<CR>
-nnoremap <C-j> :action NextSplitter<CR>
-nnoremap <C-K> :action NextSplitter<CR>
+" nnoremap <leader>q :action CloseContent<cr>
+" nnoremap <C-w>q :action CloseContent<CR>
+" nnoremap <leader>Q :action ReopenClosedTab<cr>
+" nnoremap <leader>\ :action VimFilePrevious<cr>
+" nnoremap <C-w><C-q> :action CloseContent<CR>
+" nnoremap <C-h> :action PreviousTab<CR>
+" nnoremap <C-l> :action NextTab<CR>
+" nnoremap <C-j> :action NextSplitter<CR>
+" nnoremap <C-K> :action NextSplitter<CR>
 
 " built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+" nnoremap <c-o> :action Back<cr>
+" nnoremap <c-i> :action Forward<cr>
 "" but preserve ideavim defaults
-nnoremap g<c-o> <c-o>
-nnoremap g<c-i> <c-i>
-nnoremap `. :action JumpToLastChange<cr>
+" nnoremap g<c-o> <c-o>
+" nnoremap g<c-i> <c-i>
+" nnoremap `. :action JumpToLastChange<cr>
 
 " built in search looks better
 " nnoremap / :action Find<cr>
@@ -66,7 +68,7 @@ nnoremap `. :action JumpToLastChange<cr>
 " nnoremap g/ /
 
 " easy system clipboard copy/paste
-noremap <space>y "*y
-noremap <space>Y "*Y
-noremap <space>p "*p
-noremap <space>P "*P
+" noremap <space>y "*y
+" noremap <space>Y "*Y
+" noremap <space>p "*p
+" noremap <space>P "*P

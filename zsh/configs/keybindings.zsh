@@ -31,6 +31,7 @@ bindkey -M viins "\ef" forward-word
 bindkey -M viins "\eb" backward-word
 bindkey -M viins "\ed" kill-word
 bindkey -M viins "\e^?" backward-kill-word
+bindkey -M viins "^X^T" fzf-file-widget
 
 bindkey -M vicmd '^A'  beginning-of-line
 bindkey -M vicmd '^E'  end-of-line
@@ -195,7 +196,7 @@ peco-select-gitadd() {
     zle reset-prompt
 }
 zle -N peco-select-gitadd
-bindkey '^g^a' peco-select-gitadd
+bindkey '^x^a' peco-select-gitadd
 
 exec-oneliner() {
     local oneliner_f
