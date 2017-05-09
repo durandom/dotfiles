@@ -2,6 +2,6 @@ be rubocop -a
 be rubocop-git
 git commit --amend
 git commit --amend --no-edit
-cd ~/src/manageiq ; for i in plugins/manageiq-* ;do cd $i ; echo $fg_bold[red] "- $i -----" $reset_color ; g mupstream; cd - ; done
+for i in ~/src/manageiq-providers-* ;do cd $i ; echo $fg_bold[red] "- $i -----" $reset_color ; g mup; cd - ; done
 find ~/.zsh -type l -exec test ! -e {} \; -print
 cd ~/src/dotfiles ; vim -c "FzfFiles" ; cd -

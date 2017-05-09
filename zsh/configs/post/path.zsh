@@ -14,4 +14,9 @@ PATH="$HOME/.git-aliae/bin:$PATH"
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
+eval $(minishift oc-env)
+if [ $commands[oc] ]; then
+  source <(oc completion zsh)
+fi
+
 export -U PATH

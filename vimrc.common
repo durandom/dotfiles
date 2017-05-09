@@ -14,9 +14,9 @@ set ignorecase
 set smartcase
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
-set clipboard=unnamed
-" set norelativenumber
-set relativenumber
+set clipboard=unnamedplus
+set norelativenumber
+" set relativenumber
 set updatetime=250
 
 " always jump to beginning of line, disregard leading whitespace

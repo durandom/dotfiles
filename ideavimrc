@@ -14,11 +14,12 @@ set surround
 " nnoremap <c-p> :action SearchEverywhere<cr>
 " nnoremap <leader>e :action RecentFiles<cr>
 " nnoremap <leader>E :action Switcher<cr>
-" nnoremap <leader>t :action FileStructurePopup<cr>
-" nnoremap <leader>s :action GotoSymbol<cr>
-" nnoremap <leader>c :action GotoClass<cr>
-" nnoremap <leader>f :action GotoFile<cr>
-" nnoremap <leader>x :action GotoAction<cr>
+nnoremap <leader>gm :action FileStructurePopup<cr>
+nnoremap <leader>gs :action GotoSymbol<cr>
+nnoremap <leader>gc :action GotoClass<cr>
+nnoremap <leader>gf :action GotoFile<cr>
+nnoremap <leader>ga :action GotoAction<cr>
+nnoremap <leader>gu :action FindUsages<cr>
 " nnoremap <leader>b :action ToggleLineBreakpoint<cr>
 " nnoremap <leader>h :action TypeHierarchy<cr>
 " does not work well with leader key
@@ -27,7 +28,6 @@ set surround
 " code navigation
 " nnoremap <leader>] :action GotoImplementation<cr>
 " nnoremap <leader>[ :action GotoSuperMethod<cr>
-" nnoremap <leader>u :action FindUsages<cr>
 " nnoremap <leader>gt :action GotoTest<cr>
 " nnoremap <leader>k :action HighlightUsagesInFile<cr>
 " nnoremap \r :action RunClass<cr>
@@ -59,6 +59,8 @@ set surround
 " nnoremap g<c-o> <c-o>
 " nnoremap g<c-i> <c-i>
 " nnoremap `. :action JumpToLastChange<cr>
+nnoremap g; :action JumpToLastChange<cr>
+nnoremap g, :action JumpToNextChange<cr>
 
 " built in search looks better
 " nnoremap / :action Find<cr>

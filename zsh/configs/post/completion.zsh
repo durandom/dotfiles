@@ -85,7 +85,3 @@ autoload -Uz compinit && compinit -u
 # aws
 #source /usr/bin/aws_zsh_completer.sh
 
-# openshift
-if [ $commands[oc] ]; then
-  source <(oc completion zsh)
-fi

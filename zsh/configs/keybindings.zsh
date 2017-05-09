@@ -250,3 +250,9 @@ bindkey '^x^x' exec-oneliner
 
 # handy keybindings
 #bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+
+# change to source directory
+cds() {
+  local dir
+  dir=$(ls  ~/src/ | fzf +m) && cd "$HOME/src/$dir"
+}
