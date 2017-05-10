@@ -15,7 +15,7 @@ PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
 if [ $commands[minishift] ]; then
-  if minishift oc-env | grep PATH; then
+  if minishift oc-env | grep PATH > /dev/null; then
     eval $(minishift oc-env)
   fi
 fi
