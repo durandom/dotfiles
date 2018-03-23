@@ -5,3 +5,5 @@ git commit --amend --no-edit
 for i in ~/src/manageiq-providers-* ;do cd $i ; echo $fg_bold[red] "- $i -----" $reset_color ; g mup; cd - ; done
 find ~/.zsh -type l -exec test ! -e {} \; -print
 cd ~/src/dotfiles ; vim -c "FzfFiles" ; cd -
+for i in amazon ansible_tower azure foreman google hawkular kubernetes lenovo nuage openshift openstack ovirt scvmm vmware; do be rails g provider $i --path ../ ; done
+for i in ~/src/manageiq-providers-* ;do cd $i ; echo $fg_bold[red] "- $i -----" $reset_color ; g co -b provider_generator ; g commit -a -m 'run provider generator to sync changes from core';  g push ; g pull-request -o -F ~/src/scratch/manageiq/provider_pr.md ; cd - ; done

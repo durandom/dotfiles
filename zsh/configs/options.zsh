@@ -50,3 +50,7 @@ setopt globdots
 setopt interactive_comments
 setopt list_types
 setopt magic_equal_subst
+
+# add do-enter because we define it in completions
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=do-enter
+echo $ZSH_AUTOSUGGEST_CLEAR_WIDGETS

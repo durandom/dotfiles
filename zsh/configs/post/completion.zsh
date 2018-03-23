@@ -1,7 +1,8 @@
 # from https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/completion.zsh
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-if [[ true ]]; then
+# turn of - breaks multiline powerlevel9k
+if [[ false ]]; then
   expand-or-complete-with-dots() {
     # toggle line-wrapping off and back on again
     [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti rmam
@@ -19,10 +20,11 @@ fi
 # Important
 zstyle ':completion:*:default' menu select=2
 
-# Completing Groping
+# Completing Grouping
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'
 zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' group-order original corrections
 
 # Completing misc
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -84,4 +86,3 @@ autoload -Uz compinit && compinit -u
 
 # aws
 #source /usr/bin/aws_zsh_completer.sh
-

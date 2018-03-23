@@ -5,8 +5,9 @@
 [pull]
   rebase = true
 [user]
-  name = Marcel Hild
-  email = hild@b4mad.net
+	name = Marcel Hild
+	email = hild@b4mad.net
+	signingkey = 04DAFCD9470A962A2F272984E5EB0DA32F3372AC
 [color]
   ui = auto
 [alias]
@@ -30,7 +31,7 @@
   rio = !git rebase -i $(git origin)
   unstage = reset HEAD --
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/hild/.gitignore
   autocrlf = input
   pager = less -x4
 [pager]
@@ -50,11 +51,20 @@
 [merge]
   ff = only
 [commit]
-  template = ~/.gitmessage
+	template = ~/.gitmessage
   verbose = true
+	gpgsign = true
 [fetch]
   prune = true
 [rebase]
   autosquash = true
 [include]
   path = ~/.gitconfig.local
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/hild/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg

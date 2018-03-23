@@ -6,7 +6,7 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
 ENHANCD_DISABLE_HYPHEN=1
 ENHANCD_DISABLE_DOT=1
-ENHANCD_USE_FUZZY_MATCH=0
+ENHANCD_USE_FUZZY_MATCH=1
 zplug "b4b4r07/enhancd", use:init.sh
 
 zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
@@ -26,5 +26,8 @@ zplug 'Valodim/zsh-curl-completion'
 
 zplug "mafredri/zsh-async"
 
-zplug "sindresorhus/pure"
+# zplug "sindresorhus/pure"
+POWERLEVEL9K_MODE='awesome-fontconfig'
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
+zplug "zsh-users/zsh-autosuggestions"

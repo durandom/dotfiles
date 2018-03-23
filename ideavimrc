@@ -20,6 +20,7 @@ nnoremap <leader>gc :action GotoClass<cr>
 nnoremap <leader>gf :action GotoFile<cr>
 nnoremap <leader>ga :action GotoAction<cr>
 nnoremap <leader>gu :action FindUsages<cr>
+nnoremap <leader>gg :action Vcs.QuickListPopupAction<cr>
 " nnoremap <leader>b :action ToggleLineBreakpoint<cr>
 " nnoremap <leader>h :action TypeHierarchy<cr>
 " does not work well with leader key
@@ -30,16 +31,16 @@ nnoremap <leader>gu :action FindUsages<cr>
 " nnoremap <leader>[ :action GotoSuperMethod<cr>
 " nnoremap <leader>gt :action GotoTest<cr>
 " nnoremap <leader>k :action HighlightUsagesInFile<cr>
-" nnoremap \r :action RunClass<cr>
-" nnoremap \R :action Run<cr>
+nnoremap \r :action Rerun<cr>
+nnoremap \R :action Run<cr>
 " nnoremap \d :action DebugClass<cr>
 " nnoremap \D :action Debug<cr>
 " nnoremap \c :action CheckStyleCurrentFileAction<cr>
-" nnoremap [m :action MethodUp<cr>
-" nnoremap ]m :action MethodDown<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
 
 " code refactoring
-" nnoremap <leader>rr :action RenameElement<cr>
+nnoremap <leader>rr :action RenameElement<cr>
 
 " window management
 " nnoremap <leader>q :action CloseContent<cr>
@@ -53,8 +54,8 @@ nnoremap <leader>gu :action FindUsages<cr>
 " nnoremap <C-K> :action NextSplitter<CR>
 
 " built-in navigation to navigated items works better
-" nnoremap <c-o> :action Back<cr>
-" nnoremap <c-i> :action Forward<cr>
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
 "" but preserve ideavim defaults
 " nnoremap g<c-o> <c-o>
 " nnoremap g<c-i> <c-i>
@@ -74,3 +75,7 @@ nnoremap g, :action JumpToNextChange<cr>
 " noremap <space>Y "*Y
 " noremap <space>p "*p
 " noremap <space>P "*P
+
+noremap \o :action CloseAllEditorsButActive<cr>
+noremap \f :action ReformatCode<CR>
+

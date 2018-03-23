@@ -13,12 +13,24 @@ set hlsearch
 set ignorecase
 set smartcase
 set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-set clipboard=unnamedplus
+" set autowrite     " Automatically :write before running commands
+
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
+
 set norelativenumber
 " set relativenumber
 set updatetime=250
 
 " always jump to beginning of line, disregard leading whitespace
 nmap 0 ^
-nmap <leader>s :nohlsearch<cr>:hslsearch<cr>
+
+" clear last search
+nmap <leader>s :nohlsearch<cr>:set hlsearch<cr>
+" nnoremap <CR> :noh<CR><CR>

@@ -14,6 +14,8 @@ export LESSCHARSET='utf-8'
 export VISUAL=vim
 export EDITOR=$VISUAL
 export GIT_EDITOR='vim +startinsert'
+# https://www.gnupg.org/(it)/documentation/manuals/gnupg/Common-Problems.html
+export GPG_TTY=$(tty)
 
 # LESS man page colors (makes Man pages more readable).
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -35,6 +37,8 @@ export LC_CTYPE="${LANGUAGE}"
 #setopt PROMPT_SUBST
 VIM_PROMPT="❯"
 PROMPT='%(?.%F{green}.%F{red})${VIM_PROMPT}%f '
+
+export GOPATH=~/.go
 
 prompt_pure_update_vim_prompt() {
     zle || {

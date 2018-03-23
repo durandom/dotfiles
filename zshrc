@@ -1,4 +1,9 @@
 #@IgnoreInspection BashAddShebang
+#
+# Load profiler to debug startup
+# http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+#    time  zsh -i -c exit
+# zmodload zsh/zprof
 
 if [[ -f ~/.zplug/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
@@ -58,6 +63,8 @@ _load_settings "$HOME/.zsh/configs"
 #ensure_tmux_is_running
 
 zstyle ':completion:*' menu select
+# somehow this is needed, otherwise g would not autocomplete
+source ~/.zsh/completion/_g
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -71,3 +78,6 @@ export FZF_CTRL_R_OPTS='--sort' # --exact'
 
 # added by travis gem
 [ -f /home/hild/.travis/travis.sh ] && source /home/hild/.travis/travis.sh
+
+# show profiling output
+#zprof
