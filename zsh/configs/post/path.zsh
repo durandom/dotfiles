@@ -26,4 +26,5 @@ PATH="$HOME/src/go/bin:$PATH"
 #   source <(oc completion zsh)
 # fi
 
+# source <(oc completion zsh)
 export -U PATH

@@ -2,7 +2,7 @@
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 # turn of - breaks multiline powerlevel9k
-if [[ false ]]; then
+if false; then
   expand-or-complete-with-dots() {
     # toggle line-wrapping off and back on again
     [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti rmam

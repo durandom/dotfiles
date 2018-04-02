@@ -3,7 +3,7 @@
 # Load profiler to debug startup
 # http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
 #    time  zsh -i -c exit
-# zmodload zsh/zprof
+#zmodload zsh/zprof
 
 if [[ -f ~/.zplug/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
