@@ -24,5 +24,7 @@ zplug "zsh-users/zsh-autosuggestions"
 
 
 # zplug "sindresorhus/pure"
-POWERLEVEL9K_MODE='awesome-fontconfig'
+#POWERLEVEL9K_MODE='awesome-fontconfig'
+#POWERLEVEL9K_MODE='default'
+POWERLEVEL9K_MODE='nerdfont-complete'
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme

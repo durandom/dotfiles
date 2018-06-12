@@ -15,6 +15,7 @@ PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/anaconda3/bin:$PATH"
 PATH="$HOME/src/go/bin:$PATH"
+PATH="/Library/TeX/texbin/xelatex:$PATH"
 
 
 # if [ $commands[minishift] ]; then
