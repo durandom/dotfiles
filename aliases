@@ -21,7 +21,8 @@ if is_linux; then
   alias pbcopy='xclip -selection c'
 fi
 
-alias spotify-ripper='docker run -ti --rm=true -u=1001 -v ~/Music/spotify/.spotify-ripper:/home/spotifyripper/.spotify-ripper -v `pwd`:/home/spotifyripper/music durandom/sponk'
+alias spotify-ripper='docker run -ti --rm=true -u=1001 -v ~/Music/spotify/.spotify-ripper:/home/spotifyripper/.spotify-ripper -v `pwd`:/home/spotifyripper/music durandom/sponk2'
+alias m4b-tool='docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/data kmlucy/docker-m4b-tool'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
