@@ -87,6 +87,8 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('cto-dept', 'cto-dept') +
     rh_mailing_list('data-hub', 'ai/data-hub') +
     rh_mailing_list('duesseldorf-list', 'local/duesseldorf') +
+    rh_mailing_list('boston-list', 'local/boston') +
+    rh_mailing_list('brno-list', 'local/brno') +
     rh_mailing_list('emea-announce', 'announce/emea') +
     rh_mailing_list('eng-common-logging', 'aos/eng-common-logging') +
     rh_mailing_list('germany-list', 'local/germany') +
@@ -97,6 +99,7 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('memo-list', 'memo-list') +
     rh_mailing_list('monitoring', 'monitoring') +
     rh_mailing_list('openshift-announce', 'aos/openshift-announce') +
+    rh_mailing_list('operate-first', 'operate-first') +
     rh_mailing_list('openshift-sme', 'aos/openshift-sme') +
     rh_mailing_list('pnt-managers', 'managers/pnt-managers') +
     rh_mailing_list('prod-dept', 'pnt/prod-dept') +
@@ -119,7 +122,9 @@ local rh_mailing_list(name, label = '') =
     label_archive({from: 'redhat@service-now.com'}, '_tracker/rh_service_now') +
     label_archive({from: 'workflow@redhat.com'}, '_tracker/ebs_workflow') +
     label_archive({from: 'orangehrmlive.com'}, '_tracker/orange') +
+    label_archive({from: 'redhat@myworkday.com'}, '_tracker/workday') +
     label_archive({from: 'concursolutions.com'}, '_tracker/concur') +
+    label_archive({list: 'openinfralabs@lists.opendev.org'}, 'operate-first') +
     rh_mailing_list('bugzilla', '_tracker/bz') +
     [
     {
@@ -179,6 +184,7 @@ local rh_mailing_list(name, label = '') =
         query: "*.ics"
       },
       actions: {
+        archive: true,
         labels: [
           "_ics"
         ]
