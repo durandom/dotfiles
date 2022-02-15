@@ -25,13 +25,14 @@
   fixup = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autosquash $REV^' -
   purgebranches = !"git fetch --prune --all ; git branch --merged | grep -Ev '\\*|master|dont_rm_this' | xargs -n 1 git branch -d"
   mup = !git checkout master && git fetch upstream && git merge upstream/master && git push && git checkout -
+  mupmain = !git checkout main && git fetch upstream && git merge upstream/main && git push && git checkout -
   mdownstream = !git checkout master && git fetch downstream && git merge downstream/master && git push && git checkout -
   origin = rev-parse --abbrev-ref --symbolic-full-name @{u}
   oreset = !git origin && git reset --hard $(git origin)
   rio = !git rebase -i $(git origin)
   unstage = reset HEAD --
 [core]
-	excludesfile = /Users/hild/.gitignore
+	excludesfile = /Users/mhild/.gitignore
   autocrlf = input
   pager = less -x4
 # [pager]
@@ -73,3 +74,18 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[diff "nbdiff"]
+	command = git-nbdiffdriver webdiff
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver webdiff
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false

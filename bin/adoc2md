@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# https://gist.github.com/cheungnj/38becf045654119f96c87db829f1be8e
+
+FILE=$(basename $1 .adoc)
+echo "converting $FILE"
+asciidoctor -b docbook $1
+pandoc -f docbook -t gfm ${FILE}.xml -o ${FILE}.md

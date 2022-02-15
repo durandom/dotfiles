@@ -90,6 +90,7 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('boston-list', 'local/boston') +
     rh_mailing_list('brno-list', 'local/brno') +
     rh_mailing_list('emea-announce', 'announce/emea') +
+    rh_mailing_list('czech-announce', 'announce/czech') +
     rh_mailing_list('eng-common-logging', 'aos/eng-common-logging') +
     rh_mailing_list('germany-list', 'local/germany') +
     rh_mailing_list('insights-dev') +
@@ -113,6 +114,8 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('technical-users-list', 'technical-users') +
     rh_mailing_list('upshift', 'psi') +
     rh_mailing_list('usa-announce', 'announce/usa') +
+    rh_mailing_list('octo-cloud-admins', '_tracker/aws-octo') +
+    rh_mailing_list('gitlab-cee-list', '_tracker/rh_gitlab') +
     label_archive({from: 'do-not-reply@trello.com'}, '_tracker/trello') +
     label_archive({from: 'help-ops@redhat.com'}, '_tracker/rh_service_now') +
     label_archive({from: 'hss-jira@redhat.com'}, '_tracker/jira') +
@@ -124,7 +127,13 @@ local rh_mailing_list(name, label = '') =
     label_archive({from: 'orangehrmlive.com'}, '_tracker/orange') +
     label_archive({from: 'redhat@myworkday.com'}, '_tracker/workday') +
     label_archive({from: 'concursolutions.com'}, '_tracker/concur') +
+    label_archive({from: '@pagerduty.com'}, '_tracker/pagerduty') +
+    label_archive({from: 'comments-noreply@docs.google.comment'}, '_tracker/gdocs') +
+    label_archive({from: 'drive-shares-noreply@google.com'}, '_tracker/gdocs') +
+    label_archive({from: 'comments-noreply@docs.google.com'}, '_tracker/gdocs') +
+    label_archive({from: 'noreply@hetzner.com '}, '_tracker/hetzner') +
     label_archive({list: 'openinfralabs@lists.opendev.org'}, 'operate-first') +
+    label_archive({list: 'community.lists.operate-first.cloud'}, 'operate-first') +
     rh_mailing_list('bugzilla', '_tracker/bz') +
     [
     {

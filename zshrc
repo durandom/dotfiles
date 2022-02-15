@@ -5,17 +5,20 @@
 #    time  zsh -i -c exit
 #zmodload zsh/zprof
 
-if [[ -f ~/.zplug/init.zsh ]]; then
-  export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
-  source ~/.zplug/init.zsh
+# install via homebrew
+export ZPLUG_HOME=/usr/local/opt/zplug
 
-#  if ! zplug check --verbose; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#       echo; zplug install
-#     fi
-#     echo
-#  fi
+if [[ -f $ZPLUG_HOME/init.zsh ]]; then
+  export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
+  source $ZPLUG_HOME/init.zsh
+
+  # if ! zplug check --verbose; then
+  #     printf "Install? [y/N]: "
+  #     if read -q; then
+  #       echo; zplug install
+  #     fi
+  #     echo
+  # fi
   zplug load
 fi
 

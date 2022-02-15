@@ -40,6 +40,8 @@ PROMPT='%(?.%F{green}.%F{red})${VIM_PROMPT}%f '
 
 export GOPATH=~/.go
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 prompt_pure_update_vim_prompt() {
     zle || {
         print "error: pure_update_vim_prompt must be called when zle is active"

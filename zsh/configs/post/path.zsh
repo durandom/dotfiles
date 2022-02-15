@@ -16,6 +16,8 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/anaconda3/bin:$PATH"
 PATH="$HOME/src/go/bin:$PATH"
 PATH="/Library/TeX/texbin/xelatex:$PATH"
+PATH="/usr/local/opt/libpq/bin:$PATH"
+
 
 
 # if [ $commands[minishift] ]; then
@@ -28,4 +30,6 @@ PATH="/Library/TeX/texbin/xelatex:$PATH"
 # fi
 
 # source <(oc completion zsh)
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 export -U PATH

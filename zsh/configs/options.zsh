@@ -25,7 +25,7 @@ setopt no_hist_beep
 setopt print_exit_value
 
 # Confirm when executing 'rm *'
-setopt rm_star_wait
+#setopt rm_star_wait
 
 # Let me know immediately when terminating job
 setopt notify
