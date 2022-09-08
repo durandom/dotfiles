@@ -6,19 +6,19 @@
 #zmodload zsh/zprof
 
 # install via homebrew
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
 
 if [[ -f $ZPLUG_HOME/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
   source $ZPLUG_HOME/init.zsh
 
-  # if ! zplug check --verbose; then
-  #     printf "Install? [y/N]: "
-  #     if read -q; then
-  #       echo; zplug install
-  #     fi
-  #     echo
-  # fi
+  if ! zplug check --verbose; then
+      printf "Install? [y/N]: "
+      if read -q; then
+        echo; zplug install
+      fi
+      echo
+  fi
   zplug load
 fi
 
@@ -72,6 +72,12 @@ source ~/.zsh/completion/_g
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
+# more completions
+# if [ $commands[oc] ]; then
+#   source <(oc completion zsh)
+# fi
+# source <(oc completion zsh)
+
 # Local config
 export FZF_CTRL_R_OPTS='--sort' # --exact'
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
@@ -84,3 +90,5 @@ export FZF_CTRL_R_OPTS='--sort' # --exact'
 
 # show profiling output
 #zprof
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

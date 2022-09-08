@@ -1,13 +1,4 @@
 rm -rf /Library/Extensions/Sentinel.kext
-rm -rf /Library/Extensions/Sentinel.kext/Contents
-rm -rf /Library/Extensions/Sentinel.kext/Contents/Info.plist
-rm -rf /Library/Extensions/Sentinel.kext/Contents/MacOS
-rm -rf /Library/Extensions/Sentinel.kext/Contents/MacOS/Sentinel
-rm -rf /Library/Extensions/Sentinel.kext/Contents/Resources
-rm -rf /Library/Extensions/Sentinel.kext/Contents/Resources/en.lproj
-rm -rf /Library/Extensions/Sentinel.kext/Contents/Resources/en.lproj/InfoPlist.strings
-rm -rf /Library/Extensions/Sentinel.kext/Contents/_CodeSignature
-rm -rf /Library/Extensions/Sentinel.kext/Contents/_CodeSignature/CodeResources
 rm -rf /Library/LaunchAgents/com.sentinelone.agent.plist
 rm -rf /Library/LaunchDaemons/com.sentinelone.sentineld-guard.plist
 rm -rf /Library/LaunchDaemons/com.sentinelone.sentineld-helper.plist

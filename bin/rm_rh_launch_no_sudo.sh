@@ -21,12 +21,12 @@ launchctl remove com.sentinelone.sentineld
 launchctl remove com.sentinelone.sentineld-guard
 
 # removing package
-# sudo pkgutil --forget com.sentinelone.pkg.sentinel-agent
+pkgutil --forget com.sentinelone.pkg.sentinel-agent
 
 
 
 #killall SentinelAgent
-#pkgutil --forget com.sentinelone.pkg.sentinel-agent
+pkgutil --forget com.sentinelone.pkg.sentinel-agent
 
 launchctl remove com.googlecode.munki.logouthelper
 launchctl remove com.googlecode.munki.managedsoftwareupdate-check
@@ -38,4 +38,4 @@ launchctl remove com.googlecode.munki.munki-notifier
 launchctl remove com.googlecode.munki.app_usage_monitor
 launchctl remove com.googlecode.munki.ManagedSoftwareCenter
 
-rm -rf /Volumes/osx/usr/local/munki
+#rm -rf /Volumes/osx/usr/local/munki

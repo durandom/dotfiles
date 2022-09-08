@@ -22,10 +22,10 @@ _togglePipenvShell() {
   fi
 }
 
-if [[ "$(basename ${(%):-%x})" != "_pipenv" ]]; then
-  autoload -U compinit && compinit
-  compdef _pipenv pipenv
-fi
+# if [[ "$(basename ${(%):-%x})" != "_pipenv" ]]; then
+#   autoload -U compinit && compinit
+#   compdef _pipenv pipenv
+# fi
 
 # export PROMPT_COMMAND=_togglePipenvShell
 # if [ -n "$ZSH_VERSION" ]; then

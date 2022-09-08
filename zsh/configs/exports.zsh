@@ -11,9 +11,9 @@ export LESSCHARSET='utf-8'
 #export LESSOPEN='|pygmentize -g %s'
 
 # editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
-export GIT_EDITOR='vim +startinsert'
+export GIT_EDITOR='nvim +startinsert'
 # https://www.gnupg.org/(it)/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
 

@@ -78,11 +78,15 @@ export FZF_DEFAULT_OPTS='
 '
 
 # load our own completion functions
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
-
-# completion
-autoload -Uz compinit && compinit -u
-
+fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share/zsh/site-functions $fpath)
 
 # aws
 #source /usr/bin/aws_zsh_completer.sh
+
+# source <(kubectl completion zsh)
+source <(oc completion zsh)
+
+# init completion
+autoload -Uz compinit && compinit -u
+
+

@@ -159,19 +159,19 @@ local rh_mailing_list(name, label = '') =
         labels: [ "_tracker/gh" ]
       }
     },
-    {
-      filter: {
-        and: [
-          { list: "(.github.com)" },
-          { to: "-mention@noreply.github.com" },
-        ]
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        labels: [ "_tracker/gh" ]
-      }
-    },
+    /* { */
+    /*   filter: { */
+    /*     and: [ */
+    /*       { list: "(.github.com)" }, */
+    /*       { to: "-mention@noreply.github.com" }, */
+    /*     ] */
+    /*   }, */
+    /*   actions: { */
+    /*     archive: true, */
+    /*     markSpam: false, */
+    /*     labels: [ "_tracker/gh" ] */
+    /*   } */
+    /* }, */
     {
       filter: { list: "kubeflow-discuss.googlegroups.com" },
       actions: { labels: [ "kubeflow-discuss" ] }
@@ -197,6 +197,18 @@ local rh_mailing_list(name, label = '') =
         labels: [
           "_ics"
         ]
+      }
+    },
+    {
+      filter: {
+        or: [
+          { to: "izimmerm@redhat.com" },
+          { to: "asanmukh@redhat.com" },
+        ]
+      },
+      actions: {
+        archive: true,
+        labels: [ "managers/alumnus" ]
       }
     },
   ],
