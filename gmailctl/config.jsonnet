@@ -156,6 +156,7 @@ local rh_mailing_list(name, label = '') =
       filter: { query: "list:(.github.com)" },
       actions: {
         markSpam: false,
+        archive: true,
         labels: [ "_tracker/gh" ]
       }
     },
@@ -204,6 +205,8 @@ local rh_mailing_list(name, label = '') =
         or: [
           { to: "izimmerm@redhat.com" },
           { to: "asanmukh@redhat.com" },
+          { to: "atersaak@redhat.com" },
+          { list: "Verkada-Backend.verkada.github.com" }
         ]
       },
       actions: {
