@@ -11,9 +11,11 @@ export LESSCHARSET='utf-8'
 #export LESSOPEN='|pygmentize -g %s'
 
 # editor
-export VISUAL=nvim
+# https://github.com/mhinz/neovim-remote#typical-use-cases
+# nvim seems broken
+export VISUAL=vim
 export EDITOR=$VISUAL
-export GIT_EDITOR='nvim +startinsert'
+export GIT_EDITOR='vim +startinsert'
 # https://www.gnupg.org/(it)/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
 
@@ -54,5 +56,5 @@ export XDG_CONFIG_HOME=$HOME/.config
 # function zle-line-init zle-keymap-select {
 #     prompt_pure_update_vim_prompt
 # }
-zle -N zle-line-init
+# zle -N zle-line-init
 zle -N zle-keymap-select

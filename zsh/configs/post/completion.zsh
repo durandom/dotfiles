@@ -85,6 +85,13 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share
 
 # source <(kubectl completion zsh)
 source <(oc completion zsh)
+if [ $commands[kam] ]; then
+  source <(kam completion zsh)
+fi
+
+# nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # init completion
 autoload -Uz compinit && compinit -u
