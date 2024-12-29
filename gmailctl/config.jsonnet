@@ -71,6 +71,7 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('aicoe', 'ai/coe') +
     rh_mailing_list('aicoe-aiops', 'ai/aicoe-aiops') +
     rh_mailing_list('announce-list', 'announce') +
+    rh_mailing_list('product-announce', 'announce') +
     rh_mailing_list('aos-announce') +
     rh_mailing_list('aos-devel') +
     rh_mailing_list('aos-int-services') +
@@ -120,6 +121,7 @@ local rh_mailing_list(name, label = '') =
     label_archive({from: 'help-ops@redhat.com'}, '_tracker/rh_service_now') +
     label_archive({from: 'hss-jira@redhat.com'}, '_tracker/jira') +
     label_archive({from: 'jira@jira.prod.coreos.systems'}, '_tracker/jira') +
+    label_archive({from: 'jira-issues@redhat.com'}, '_tracker/jira') +
     label_archive({from: 'kundenservice@egencia.de'}, '_tracker/egencia') +
     label_archive({from: 'people-helpdesk@redhat.com'}, '_tracker/rh_service_now') +
     label_archive({from: 'redhat@service-now.com'}, '_tracker/rh_service_now') +

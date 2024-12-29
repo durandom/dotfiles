@@ -153,3 +153,5 @@
 	HEAD = 6 normal italic
 [diff]
 	colorMoved = zebra
+[url "git@github.com:"]
+	insteadOf = https://github.com/

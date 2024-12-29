@@ -58,3 +58,5 @@ export XDG_CONFIG_HOME=$HOME/.config
 # }
 # zle -N zle-line-init
 zle -N zle-keymap-select
+
+# export AICHAT_LOG_LEVEL=debug

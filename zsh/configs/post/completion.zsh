@@ -84,7 +84,10 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share
 #source /usr/bin/aws_zsh_completer.sh
 
 # source <(kubectl completion zsh)
-source <(oc completion zsh)
+# if oc is available, load its completion
+if [ $commands[oc] ]; then
+  source <(oc completion zsh)
+fi
 if [ $commands[kam] ]; then
   source <(kam completion zsh)
 fi
@@ -93,7 +96,22 @@ fi
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+# aichat
+# _aichat_zsh() {
+#     if [[ -n "$BUFFER" ]]; then
+#         local _old=$BUFFER
+#         BUFFER+="⌛"
+#         zle -I && zle redisplay
+#         BUFFER=$(aichat -e "$_old")
+#         zle end-of-line
+#     fi
+# }
+# zle -N _aichat_zsh
+# # bind to ctrl k
+# bindkey '^k' _aichat_zsh
+# # bindkey '\ee' _aichat_zsh
+
 # init completion
 autoload -Uz compinit && compinit -u
 
-
+source <(fzf --zsh)

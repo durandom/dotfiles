@@ -1,8 +1,7 @@
 # ensure dotfiles bin directory is loaded first
 PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 # PATH="/opt/homebrew/opt/node@16/bin:$PATH"
@@ -17,7 +16,10 @@ if command -v rbenv >/dev/null; then
 fi
 
 # Python
-eval "$(pyenv init -)"
+# check if pyenv is available
+if command -v pyenv >/dev/null; then
+  eval "$(pyenv init -)"
+fi
 # eval "$(pyenv virtualenv-init -)"
 
 # NVM
@@ -25,5 +27,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # KREW
 PATH="${PATH}:${HOME}/.krew/bin"
+
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 
 export -U PATH
