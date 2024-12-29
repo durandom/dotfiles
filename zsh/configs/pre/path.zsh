@@ -1,7 +1,14 @@
 # ensure dotfiles bin directory is loaded first
 PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 
-eval "$(brew shellenv)"
+# Homebrew
+# check if linuxbrew is available
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+if [ -d /opt/homebrew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 # PATH="/opt/homebrew/opt/node@16/bin:$PATH"
