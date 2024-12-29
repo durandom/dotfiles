@@ -13,10 +13,10 @@ fi
 #zmodload zsh/zprof
 
 # install via homebrew
-if [ -f /opt/homebrew/bin/zplug ]; then
+if [ -d /opt/homebrew/opt/zplug ]; then
   export ZPLUG_HOME=/opt/homebrew/opt/zplug
 fi
-if [ -f /home/linuxbrew/.linuxbrew/opt/zplug ]; then
+if [ -d /home/linuxbrew/.linuxbrew/opt/zplug ]; then
   export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
 fi
 
