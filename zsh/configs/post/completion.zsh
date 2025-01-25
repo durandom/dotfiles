@@ -80,6 +80,16 @@ export FZF_DEFAULT_OPTS='
 # load our own completion functions
 fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share/zsh/site-functions $fpath)
 
+
+# init completion
+autoload -Uz compinit && compinit -u
+
+source <(fzf --zsh)
+
+if [ $commands[jira] ]; then
+  source <(jira completion zsh)
+fi
+
 # aws
 #source /usr/bin/aws_zsh_completer.sh
 
@@ -93,8 +103,9 @@ if [ $commands[kam] ]; then
 fi
 
 # nvm
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+# This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # aichat
 # _aichat_zsh() {
@@ -110,8 +121,3 @@ fi
 # # bind to ctrl k
 # bindkey '^k' _aichat_zsh
 # # bindkey '\ee' _aichat_zsh
-
-# init completion
-autoload -Uz compinit && compinit -u
-
-source <(fzf --zsh)

@@ -1,3 +1,10 @@
+#@IgnoreInspection BashAddShebang
+#
+# Load profiler to debug startup
+# http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+#    time  zsh -i -c exit
+zmodload zsh/zprof
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,12 +12,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#@IgnoreInspection BashAddShebang
-#
-# Load profiler to debug startup
-# http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
-#    time  zsh -i -c exit
-#zmodload zsh/zprof
 
 # install via homebrew
 if [ -d /opt/homebrew/opt/zplug ]; then
@@ -80,6 +81,9 @@ _load_settings "$HOME/.zsh/configs"
 zstyle ':completion:*' menu select
 # somehow this is needed, otherwise g would not autocomplete
 source ~/.zsh/completion/_g
+if [ $commands[jira] ]; then
+  source <(jira completion zsh)
+fi
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
