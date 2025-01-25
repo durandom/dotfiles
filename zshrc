@@ -13,12 +13,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-# install via homebrew
-if [ -d /opt/homebrew/opt/zplug ]; then
-  export ZPLUG_HOME=/opt/homebrew/opt/zplug
+# check if we have homebrew of linuxbrew
+if [ -d /opt/homebrew ]; then
+  export HOME_BREW=/opt/homebrew
 fi
-if [ -d /home/linuxbrew/.linuxbrew/opt/zplug ]; then
-  export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  export HOME_BREW=/home/linuxbrew/.linuxbrew
+fi
+
+# check if we have zplug
+if [ -d $HOME_BREW/opt/zplug ]; then
+  export ZPLUG_HOME=$HOME_BREW/opt/zplug
 fi
 
 if [[ -f $ZPLUG_HOME/init.zsh ]]; then
@@ -33,6 +38,7 @@ if [[ -f $ZPLUG_HOME/init.zsh ]]; then
       echo
   fi
   zplug load
+  # zplug load --verbose
 fi
 
 # load custom executable functions
