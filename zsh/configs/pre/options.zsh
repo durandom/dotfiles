@@ -53,3 +53,6 @@ setopt magic_equal_subst
 
 # add do-enter because we define it in completions
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=do-enter
+
+# Enable completion system
+autoload -Uz compinit && compinit

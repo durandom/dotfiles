@@ -24,7 +24,7 @@ fi
 # container aliases
 alias spotify-ripper='docker run -ti --rm=true -u=1001 -v ~/Music/spotify/.spotify-ripper:/home/spotifyripper/.spotify-ripper -v `pwd`:/home/spotifyripper/music durandom/sponk2'
 alias m4b-tool='docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/data kmlucy/docker-m4b-tool'
-# alias rasa='docker run -it --rm -v $(pwd):/app rasa/rasa:latest-full' # https://hub.docker.com/r/rasa/rasa / 
+# alias rasa='docker run -it --rm -v $(pwd):/app rasa/rasa:latest-full' # https://hub.docker.com/r/rasa/rasa /
 alias rasa='docker run -it --rm -v $(pwd):/app khalosa/rasa-aarch64' # https://github.com/khalo-sa/rasa-apple-silicon
 alias opf='docker run -it --rm -v $(pwd):/app durandom/toolbox' # https://github.com/operate-first/toolbox
 

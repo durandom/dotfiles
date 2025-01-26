@@ -60,17 +60,17 @@ is_ssh_running() {
 
 # ostype returns the lowercase OS name
 ostype() {
-    echo ${(L):-$(uname)}
+    echo ${(L)OSTYPE}
 }
 
 # os_detect export the PLATFORM variable as you see fit
 os_detect() {
     export PLATFORM
-    case "$(ostype)" in
-        *'linux'*)  PLATFORM='linux'   ;;
-        *'darwin'*) PLATFORM='osx'     ;;
-        *'bsd'*)    PLATFORM='bsd'     ;;
-        *)          PLATFORM='unknown' ;;
+    case "$OSTYPE" in
+        linux*)   PLATFORM='linux'  ;;
+        darwin*)  PLATFORM='osx'    ;;
+        *bsd*)    PLATFORM='bsd'    ;;
+        *)        PLATFORM='unknown' ;;
     esac
 }
 

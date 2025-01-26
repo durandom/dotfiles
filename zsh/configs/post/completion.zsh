@@ -1,21 +1,6 @@
 # from https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/completion.zsh
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-# turn of - breaks multiline powerlevel9k
-if false; then
-  expand-or-complete-with-dots() {
-    # toggle line-wrapping off and back on again
-    [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti rmam
-    print -Pn "%{%F{red}......%f%}"
-    [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti smam
-
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  bindkey "^I" expand-or-complete-with-dots
-fi
-
 # from https://github.com/b4b4r07/dotfiles/blob/93c479ace77ba123a4ed6b42a4787350b90c1553/.zsh/70_misc.zsh
 # Important
 zstyle ':completion:*:default' menu select=2
@@ -82,7 +67,7 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share
 
 
 # init completion
-autoload -Uz compinit && compinit -u
+zsh-defer compinit -u
 
 source <(fzf --zsh)
 
@@ -103,9 +88,9 @@ if [ $commands[kam] ]; then
 fi
 
 # nvm
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-# This loads nvm bash_completion
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+# # This loads nvm bash_completion
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # aichat
 # _aichat_zsh() {
@@ -121,3 +106,5 @@ fi
 # # bind to ctrl k
 # bindkey '^k' _aichat_zsh
 # # bindkey '\ee' _aichat_zsh
+
+eval "$(zoxide init zsh --cmd cd)"

@@ -1,29 +1,53 @@
 #  Load profiler to debug startup
 # http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
 #    time  zsh -i -c exit
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
 # enable verbose logging
 # set -x
 
 # OS specific settings
-# check if we have homebrew of linuxbrew
-if [ -d /opt/homebrew ]; then
-  export HOME_BREW=/opt/homebrew
-fi
-if [ -d /home/linuxbrew/.linuxbrew ]; then
-  export HOME_BREW=/home/linuxbrew/.linuxbrew
-fi
 
-# PATH
-#
-# ensure dotfiles bin directory is loaded first
-PATH="$HOME/.bin:$PATH"
+# load custom executable functions
+for function in ~/.zsh/functions/*; do
+  source $function
+done
 
-# Homebrew
-if [[ -f $HOME_BREW/bin/brew ]]; then
-  eval "$($HOME_BREW/bin/brew shellenv)"
-fi
+# extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
+# these are loaded first, second, and third, respectively.
+_load_settings() {
+  _dir="$1"
+  if [ -d "$_dir" ]; then
+    if [ -d "$_dir/pre" ]; then
+      for config in "$_dir"/pre/**/*(N-.); do
+        . $config
+      done
+    fi
 
-# Initialize sheldon - config is at ~/.config/sheldon/config.toml
-[ -f ~/.config/sheldon/plugins.toml ] && eval "$(sheldon source)"
+    for config in "$_dir"/**/*(N-.); do
+      case "$config" in
+        "$_dir"/pre/*)
+          :
+          ;;
+        "$_dir"/post/*)
+          :
+          ;;
+        *)
+          if [ -f $config ]; then
+            . $config
+          fi
+          ;;
+      esac
+    done
+
+    if [ -d "$_dir/post" ]; then
+      for config in "$_dir"/post/**/*(N-.); do
+        . $config
+      done
+    fi
+  fi
+}
+_load_settings "$HOME/.zsh/configs"
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
