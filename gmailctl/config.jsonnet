@@ -117,6 +117,7 @@ local rh_mailing_list(name, label = '') =
     rh_mailing_list('usa-announce', 'announce/usa') +
     rh_mailing_list('octo-cloud-admins', '_tracker/aws-octo') +
     rh_mailing_list('gitlab-cee-list', '_tracker/rh_gitlab') +
+    rh_mailing_list('devx-extended', 'pnt/devx-extended') +
     label_archive({from: 'do-not-reply@trello.com'}, '_tracker/trello') +
     label_archive({from: 'help-ops@redhat.com'}, '_tracker/rh_service_now') +
     label_archive({from: 'hss-jira@redhat.com'}, '_tracker/jira') +

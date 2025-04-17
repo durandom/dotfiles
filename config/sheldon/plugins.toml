@@ -40,3 +40,6 @@ apply = ["defer"]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 apply = ["defer"]
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
