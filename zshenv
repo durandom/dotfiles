@@ -26,4 +26,20 @@ Please move that configuration to \`.zshrc.local' like so:
 MSG
 fi
 
+if [[ -f ~/.zsh/functions/0_utils.zsh ]]; then
+  source ~/.zsh/functions/0_utils.zsh
+fi
+if is_osx; then
+  function update_theme_env_var() {
+    if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
+      export AICHAT_LIGHT_THEME=false
+    else
+      export AICHAT_LIGHT_THEME=true
+    fi
+  }
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd update_theme_env_var
+fi
+
 unset _old_path
