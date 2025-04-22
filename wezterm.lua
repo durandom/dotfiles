@@ -8,6 +8,9 @@ local config = wezterm.config_builder()
 config.font = wezterm.font 'DankMono Nerd Font'
 config.font_size = 14
 
+config.scrollback_lines = 35000
+config.enable_scroll_bar = true
+
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 function get_appearance()
@@ -58,7 +61,7 @@ local schemes = {
     },
     bluloco = {
         dark = "BlulocoDark", -- Common name. Config name might be 'bluloco_dark'.
-        light = "Bluloco Light (Gogh)" -- Common name. Config name might be 'bluloco_light'.
+        light = "BlulocoLight" -- Common name. Config name might be 'bluloco_light'.
     }
 }
 
@@ -73,84 +76,52 @@ end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
-config.window_frame = {
-    -- The font used in the tab bar.
-    -- Roboto Bold is the default; this font is bundled
-    -- with wezterm.
-    -- Whatever font is selected here, it will have the
-    -- main font setting appended to it to pick up any
-    -- fallback fonts you may have used there.
-    font = wezterm.font {
-        family = 'DankMono Nerd Font',
-        weight = 'Bold'
-    },
+-- config.window_frame = {
+--     -- The font used in the tab bar.
+--     -- Roboto Bold is the default; this font is bundled
+--     -- with wezterm.
+--     -- Whatever font is selected here, it will have the
+--     -- main font setting appended to it to pick up any
+--     -- fallback fonts you may have used there.
+--     font = wezterm.font {
+--         family = 'DankMono Nerd Font',
+--         weight = 'Bold'
+--     },
 
-    -- The size of the font in the tab bar.
-    -- Default to 10.0 on Windows but 12.0 on other systems
-    font_size = 14.0,
+--     -- The size of the font in the tab bar.
+--     -- Default to 10.0 on Windows but 12.0 on other systems
+--     font_size = 14.0,
 
-    -- The overall background color of the tab bar when
-    -- the window is focused
-    active_titlebar_bg = '#333333',
+--     -- The overall background color of the tab bar when
+--     -- the window is focused
+--     -- use the background color of the theme
+--     active_titlebar_bg = '#333333',
 
-    -- The overall background color of the tab bar when
-    -- the window is not focused
-    inactive_titlebar_bg = '#333333'
+--     -- The overall background color of the tab bar when
+--     -- the window is not focused
+--     inactive_titlebar_bg = '#333333'
+-- }
+
+-- tab bar settings
+-- It is important that the apply_to_config-function is called after color_scheme has been set.
+-- config.tab_bar_at_bottom = true
+local bar = wezterm.plugin.require("https://github.com/adriankarlen/bar.wezterm")
+bar.apply_to_config(config,
+{
+    modules = {
+        cwd = {
+            enabled = true
+        },
+        zoom = {
+            enabled = true
+        },
+    }
+})
+
+config.colors.tab_bar.new_tab = {
+    bg_color = config.colors.tab_bar.active_tab.bg_color,
+    fg_color = config.colors.tab_bar.active_tab.fg_color,
 }
 
-config.scrollback_lines = 35000
-config.enable_scroll_bar = true
-
--- -- keybindings
--- -- timeout_milliseconds defaults to 1000 and can be omitted
--- config.leader = {
---     key = 's',
---     mods = 'CTRL',
---     timeout_milliseconds = 1000
--- }
--- config.keys = {{
---     key = '\\',
---     mods = 'LEADER',
---     action = wezterm.action.SplitHorizontal {
---         domain = 'CurrentPaneDomain'
---     }
--- }, -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
--- {
---     key = '-',
---     mods = 'LEADER',
---     action = wezterm.action.SplitVertical {
---         domain = 'CurrentPaneDomain'
---     }
--- }, {
---     key = 's',
---     mods = 'LEADER|CTRL',
---     action = wezterm.action.SendKey {
---         key = 's',
---         mods = 'CTRL'
---     },
---     { key = "z", mods = "LEADER",       action="TogglePaneZoomState" },
---     { key = "c", mods = "LEADER",       action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
---     { key = "h", mods = "LEADER",       action=wezterm.action{ActivatePaneDirection="Left"}},
---     { key = "j", mods = "LEADER",       action=wezterm.action{ActivatePaneDirection="Down"}},
---     { key = "k", mods = "LEADER",       action=wezterm.action{ActivatePaneDirection="Up"}},
---     { key = "l", mods = "LEADER",       action=wezterm.action{ActivatePaneDirection="Right"}},
---     { key = "H", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Left", 5}}},
---     { key = "J", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Down", 5}}},
---     { key = "K", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Up", 5}}},
---     { key = "L", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Right", 5}}},
---     { key = "1", mods = "LEADER",       action=wezterm.action{ActivateTab=0}},
---     { key = "2", mods = "LEADER",       action=wezterm.action{ActivateTab=1}},
---     { key = "3", mods = "LEADER",       action=wezterm.action{ActivateTab=2}},
---     { key = "4", mods = "LEADER",       action=wezterm.action{ActivateTab=3}},
---     { key = "5", mods = "LEADER",       action=wezterm.action{ActivateTab=4}},
---     { key = "6", mods = "LEADER",       action=wezterm.action{ActivateTab=5}},
---     { key = "7", mods = "LEADER",       action=wezterm.action{ActivateTab=6}},
---     { key = "8", mods = "LEADER",       action=wezterm.action{ActivateTab=7}},
---     { key = "9", mods = "LEADER",       action=wezterm.action{ActivateTab=8}},
---     { key = "&", mods = "LEADER|SHIFT", action=wezterm.action{CloseCurrentTab={confirm=true}}},
---     { key = "d", mods = "LEADER",       action=wezterm.action{CloseCurrentPane={confirm=true}}},
---     { key = "x", mods = "LEADER",       action=wezterm.action{CloseCurrentPane={confirm=true}}},
-
--- }}
 -- and finally, return the configuration to wezterm
 return config
