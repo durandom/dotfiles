@@ -41,5 +41,10 @@ github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 apply = ["defer"]
 
+[plugins.zsh-autosuggestions.hooks]
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+# https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-highlight-style
+pre = "export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=\"fg=10\""
+
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
