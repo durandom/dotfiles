@@ -2,8 +2,8 @@
 # With arguments: acts like `git`
 g() {
   if [[ $# -gt 0 ]]; then
-    hub "$@"
+    git "$@"
   else
-    hub status
+    git status
   fi
 }

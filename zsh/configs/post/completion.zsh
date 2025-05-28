@@ -97,9 +97,10 @@ if [ $commands[kam] ]; then
 fi
 
 # nvm
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+# uncommented for startup time
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 # This loads nvm bash_completion
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # aichat
 # _aichat_zsh() {
@@ -117,3 +118,6 @@ fi
 # # bindkey '\ee' _aichat_zsh
 
 eval "$(zoxide init zsh --cmd cd)"
+
+# make sure completion works for g command the same way as git
+compdef g=git

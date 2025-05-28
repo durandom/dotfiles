@@ -1,7 +1,11 @@
 #  Load profiler to debug startup
 # http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+# uncomment the following line to enable profiling
+# zmodload zsh/zprof
+# at the uncomment the zprof line
+# the run:
 #    time  zsh -i -c exit
-zmodload zsh/zprof
+
 
 # enable verbose logging
 # set -x
@@ -58,3 +62,5 @@ _load_settings "$HOME/.zsh/configs"
 # binds Ctrl-T, Alt-C, Ctrl-R
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# show the profiler output
+# zprof

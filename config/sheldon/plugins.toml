@@ -48,3 +48,8 @@ pre = "export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=\"fg=10\""
 
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
+
+[plugins.uv-shell]
+# https://github.com/astral-sh/uv/issues/1910
+github = "benbenbang/uv-shell"
+use = ["{{ name }}.sh"]

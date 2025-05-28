@@ -1,8 +1,19 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local act = wezterm.action
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+
+-- Bell notification handler for macOS
+wezterm.on('bell', function(window, pane)
+  -- Trigger Mac notification using osascript
+  wezterm.background_child_process({
+    'osascript',
+    '-e',
+    'display notification "Bell triggered in WezTerm" with title "WezTerm Alert" sound name "Glass"'
+  })
+end)
 
 -- This is where you actually apply your config choices
 config.font = wezterm.font 'DankMono Nerd Font'
@@ -10,6 +21,44 @@ config.font_size = 14
 
 config.scrollback_lines = 35000
 config.enable_scroll_bar = true
+
+-- Add key bindings for Option+Left/Right for word navigation
+config.keys = {
+  -- Option+Left: move backward one word (macOS standard)
+  {
+    key = 'LeftArrow',
+    mods = 'OPT',
+    action = wezterm.action.SendString('\x1b\x62'), -- ESC+b
+  },
+  -- Option+Right: move forward one word (macOS standard)
+  {
+    key = 'RightArrow',
+    mods = 'OPT',
+    action = wezterm.action.SendString('\x1b\x66'), -- ESC+f
+  },
+  {
+    key = '>',
+    mods = 'CTRL|SHIFT',
+    action = act.PromptInputLine {
+      description = 'Enter new name for tab',
+    --   initial_value = 'My Tab Name',
+      action = wezterm.action_callback(function(window, pane, line)
+        -- line will be `nil` if they hit escape without entering anything
+        -- An empty string if they just hit enter
+        -- Or the actual line of text they wrote
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    },
+  },
+  -- Disable Option+Enter fullscreen to allow Claude CLI to use it
+  {
+    key = 'Enter',
+    mods = 'OPT',
+    action = wezterm.action.SendString('\x1b\x0d'), -- ESC+Enter
+  },
+}
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
@@ -76,32 +125,6 @@ end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
--- config.window_frame = {
---     -- The font used in the tab bar.
---     -- Roboto Bold is the default; this font is bundled
---     -- with wezterm.
---     -- Whatever font is selected here, it will have the
---     -- main font setting appended to it to pick up any
---     -- fallback fonts you may have used there.
---     font = wezterm.font {
---         family = 'DankMono Nerd Font',
---         weight = 'Bold'
---     },
-
---     -- The size of the font in the tab bar.
---     -- Default to 10.0 on Windows but 12.0 on other systems
---     font_size = 14.0,
-
---     -- The overall background color of the tab bar when
---     -- the window is focused
---     -- use the background color of the theme
---     active_titlebar_bg = '#333333',
-
---     -- The overall background color of the tab bar when
---     -- the window is not focused
---     inactive_titlebar_bg = '#333333'
--- }
-
 -- tab bar settings
 -- It is important that the apply_to_config-function is called after color_scheme has been set.
 -- config.tab_bar_at_bottom = true
@@ -121,6 +144,14 @@ bar.apply_to_config(config,
 config.colors.tab_bar.new_tab = {
     bg_color = config.colors.tab_bar.active_tab.bg_color,
     fg_color = config.colors.tab_bar.active_tab.fg_color,
+}
+
+-- Bell configuration
+config.audible_bell = "Disabled"  -- Disable system beep since we're using notifications
+config.visual_bell = {
+  fade_in_duration_ms = 75,
+  fade_out_duration_ms = 75,
+  target = 'CursorColor',  -- Flash the cursor instead of background
 }
 
 -- and finally, return the configuration to wezterm

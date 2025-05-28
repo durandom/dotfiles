@@ -90,6 +90,15 @@ clients:
       - name: mercury-coder-small
         max_input_tokens: 16384
 
+  # WCA
+  - type: openai-compatible
+    name: wca
+    api_base: http://localhost:5001/v1
+    api_key: dummy
+    models:
+      - name: watson-ai
+        max_input_tokens: 16384
+
 editor: code
 
 # ---- RAG ----
