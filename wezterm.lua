@@ -1,54 +1,110 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 local act = wezterm.action
+wezterm.on("window-config-reloaded", function(window, pane)
+	window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
+end)
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+
+-- Notification function that matches toast_notification signature
+-- Set USE_TOAST to true for WezTerm toast, false for OSA script
+-- printf "\e]777;notify;%s;%s\e\\" "title" "body"
+-- https://github.com/wezterm/wezterm/issues/4853
+-- See this issue for a discussion about the notifications always being hidden despite the setting of them being a banner or an alert.
+
+local USE_TOAST = false
+
+local function send_notification(window, title, message, url, timeout_milliseconds)
+  if USE_TOAST then
+    -- Use WezTerm's built-in toast notification
+    if window then
+      window:toast_notification(title, message, url, timeout_milliseconds or 3000)
+    end
+  else
+    -- Use macOS system notification via osascript
+    local cmd = string.format('display notification "%s" with title "%s" sound name "Glass"', message, title)
+
+    -- Add subtitle if URL is provided (repurpose URL as subtitle)
+    if url and url ~= "" then
+      cmd = string.format('display notification "%s" with title "%s" subtitle "%s" sound name "Glass"', message, title, url)
+    end
+
+    wezterm.background_child_process({
+      'osascript',
+      '-e',
+      cmd
+    })
+  end
+end
+
+-- Bell configuration
+config.audible_bell = "Disabled"  -- Disable system beep since we're using notifications
+config.visual_bell = {
+  fade_in_duration_ms = 20,
+  fade_out_duration_ms = 20,
+  -- target = 'CursorColor',  -- Flash the cursor instead of background
+  target = 'BackgroundColor',  -- Flash the background instead of cursor
+}
+-- https://wezterm.org/config/lua/config/notification_handling.html
+config.notification_handling = "AlwaysShow"
 
 -- Bell notification handler for macOS
 wezterm.on('bell', function(window, pane)
   -- Get the current foreground process info
   local process_info = pane:get_foreground_process_info()
   local process_name = pane:get_foreground_process_name()
-
-  -- Try to get process arguments to detect claude
-  local is_claude = false
-  if process_info and process_info.argv then
-    for _, arg in ipairs(process_info.argv) do
-      if arg:match("claude") then
-        is_claude = true
-        break
-      end
-    end
-  end
-
-  -- Also check pane title as a fallback
   local pane_title = pane:get_title()
-  if pane_title:match("claude") then
-    is_claude = true
-  end
 
   -- Check if audible bell should be enabled for this process
   local enable_audible_for = {
-    ["cloud"] = true,
+    ["claude"] = "Claude Code session alert",
+    ["pane_title:claude"] = "Claude Code pane alert",  -- Match pane title containing "claude"
+    ["process_info:claude"] = "Claude Code process alert", -- Match process args containing "claude"
     -- Add more commands here as needed
   }
 
   -- Extract just the command name from the full path
   local cmd = process_name:match("([^/]+)$") or process_name
 
-  if enable_audible_for[cmd] or is_claude then
-    wezterm.log_info("Audible bell for: " .. (is_claude and "claude" or cmd))
-    -- For specific commands, play sound
-    wezterm.background_child_process({
-      'osascript',
-      '-e',
-      'display notification "Bell triggered in WezTerm" with title "WezTerm Alert" sound name "Glass"'
-    })
+  -- Check various conditions for audible bell
+  local notification_message = nil
+  local trigger_reason = cmd
+
+  -- Check command name
+  if enable_audible_for[cmd] then
+    notification_message = enable_audible_for[cmd]
+    trigger_reason = cmd
+  end
+
+  -- Check pane title
+  if pane_title and enable_audible_for["pane_title:claude"] and pane_title:match("claude") then
+    notification_message = enable_audible_for["pane_title:claude"]
+    trigger_reason = "pane_title:claude"
+  end
+
+  -- Check process arguments
+  if process_info and process_info.argv and enable_audible_for["process_info:claude"] then
+    for _, arg in ipairs(process_info.argv) do
+      if arg:match("claude") then
+        notification_message = enable_audible_for["process_info:claude"]
+        trigger_reason = "process_info:claude"
+        break
+      end
+    end
+  end
+
+  if notification_message then
+    wezterm.log_info("Audible bell for: " .. trigger_reason)
+    -- Send notification using configured method
+    send_notification(window, 'WezTerm Alert', notification_message, trigger_reason, 3000)
+    -- Suppress visual bell for these commands by returning early
+    return
   else
     wezterm.log_info("Visual bell for: " .. cmd)
   end
-  -- Visual bell will still trigger for all commands via the config below
+  -- Visual bell will trigger for other commands via the config below
 end)
 
 -- This is where you actually apply your config choices
@@ -235,6 +291,17 @@ config.keys = {
     mods = 'LEADER',
     action = act.ActivateTab(4),
   },
+
+  -- Plugin management
+  -- Update all plugins
+  {
+    key = 'u',
+    mods = 'LEADER',
+    action = wezterm.action_callback(function(window, pane)
+      wezterm.plugin.update_all()
+      send_notification(window, 'WezTerm', 'Plugins updated! Restart WezTerm to apply changes.', nil, 4000)
+    end),
+  },
 }
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -318,18 +385,6 @@ bar.apply_to_config(config,
     }
 })
 
-config.colors.tab_bar.new_tab = {
-    bg_color = config.colors.tab_bar.active_tab.bg_color,
-    fg_color = config.colors.tab_bar.active_tab.fg_color,
-}
-
--- Bell configuration
-config.audible_bell = "Disabled"  -- Disable system beep since we're using notifications
-config.visual_bell = {
-  fade_in_duration_ms = 75,
-  fade_out_duration_ms = 75,
-  -- target = 'CursorColor',  -- Flash the cursor instead of background
-}
 
 -- and finally, return the configuration to wezterm
 return config
