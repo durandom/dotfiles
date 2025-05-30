@@ -382,8 +382,16 @@ bar.apply_to_config(config,
         zoom = {
             enabled = true
         },
+        tabs = {
+            active_tab_fg = 1,    -- White/bright color for active tab text
+            inactive_tab_fg = 7,  -- Darker color for inactive tab text
+        }
     }
 })
+
+-- Override active tab background to be more prominent using accent color
+config.colors.tab_bar.active_tab.bg_color = "#569cd6"  -- Blue accent color
+config.colors.tab_bar.active_tab.fg_color = "#ffffff"  -- White text for contrast
 
 
 -- and finally, return the configuration to wezterm
