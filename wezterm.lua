@@ -7,12 +7,48 @@ local config = wezterm.config_builder()
 
 -- Bell notification handler for macOS
 wezterm.on('bell', function(window, pane)
-  -- Trigger Mac notification using osascript
-  wezterm.background_child_process({
-    'osascript',
-    '-e',
-    'display notification "Bell triggered in WezTerm" with title "WezTerm Alert" sound name "Glass"'
-  })
+  -- Get the current foreground process info
+  local process_info = pane:get_foreground_process_info()
+  local process_name = pane:get_foreground_process_name()
+
+  -- Try to get process arguments to detect claude
+  local is_claude = false
+  if process_info and process_info.argv then
+    for _, arg in ipairs(process_info.argv) do
+      if arg:match("claude") then
+        is_claude = true
+        break
+      end
+    end
+  end
+
+  -- Also check pane title as a fallback
+  local pane_title = pane:get_title()
+  if pane_title:match("claude") then
+    is_claude = true
+  end
+
+  -- Check if audible bell should be enabled for this process
+  local enable_audible_for = {
+    ["cloud"] = true,
+    -- Add more commands here as needed
+  }
+
+  -- Extract just the command name from the full path
+  local cmd = process_name:match("([^/]+)$") or process_name
+
+  if enable_audible_for[cmd] or is_claude then
+    wezterm.log_info("Audible bell for: " .. (is_claude and "claude" or cmd))
+    -- For specific commands, play sound
+    wezterm.background_child_process({
+      'osascript',
+      '-e',
+      'display notification "Bell triggered in WezTerm" with title "WezTerm Alert" sound name "Glass"'
+    })
+  else
+    wezterm.log_info("Visual bell for: " .. cmd)
+  end
+  -- Visual bell will still trigger for all commands via the config below
 end)
 
 -- This is where you actually apply your config choices
@@ -151,7 +187,7 @@ config.audible_bell = "Disabled"  -- Disable system beep since we're using notif
 config.visual_bell = {
   fade_in_duration_ms = 75,
   fade_out_duration_ms = 75,
-  target = 'CursorColor',  -- Flash the cursor instead of background
+  -- target = 'CursorColor',  -- Flash the cursor instead of background
 }
 
 -- and finally, return the configuration to wezterm
