@@ -58,6 +58,9 @@ config.font_size = 14
 config.scrollback_lines = 35000
 config.enable_scroll_bar = true
 
+-- Set up leader/prefix key (like tmux)
+config.leader = { key = 's', mods = 'CTRL', timeout_milliseconds = 1000 }
+
 -- Add key bindings for Option+Left/Right for word navigation
 config.keys = {
   -- Option+Left: move backward one word (macOS standard)
@@ -93,6 +96,144 @@ config.keys = {
     key = 'Enter',
     mods = 'OPT',
     action = wezterm.action.SendString('\x1b\x0d'), -- ESC+Enter
+  },
+
+  -- Leader/Prefix key bindings (tmux-style)
+  -- Send Ctrl+S when pressing leader twice
+  {
+    key = 's',
+    mods = 'LEADER|CTRL',
+    action = act.SendKey { key = 's', mods = 'CTRL' },
+  },
+
+  -- Pane splitting
+  -- Split horizontal (top/bottom) - like tmux's Ctrl-b "
+  {
+    key = '"',
+    mods = 'LEADER|SHIFT',
+    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+  -- Split vertical (left/right) - like tmux's Ctrl-b %
+  {
+    key = '%',
+    mods = 'LEADER|SHIFT',
+    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+
+  -- Alternative easier splits (no shift required)
+  {
+    key = '-',
+    mods = 'LEADER',
+    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = '\\',
+    mods = 'LEADER',
+    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+
+  -- Pane navigation with leader + arrow keys
+  {
+    key = 'LeftArrow',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'RightArrow',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'UpArrow',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'DownArrow',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Down',
+  },
+
+  -- Pane navigation with vim-style keys
+  {
+    key = 'h',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'j',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Down',
+  },
+  {
+    key = 'k',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'l',
+    mods = 'LEADER',
+    action = act.ActivatePaneDirection 'Right',
+  },
+
+  -- Close current pane
+  {
+    key = 'x',
+    mods = 'LEADER',
+    action = act.CloseCurrentPane { confirm = true },
+  },
+
+  -- Toggle pane zoom state
+  {
+    key = 'z',
+    mods = 'LEADER',
+    action = act.TogglePaneZoomState,
+  },
+
+  -- Create new tab
+  {
+    key = 'c',
+    mods = 'LEADER',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
+
+  -- Navigate tabs
+  {
+    key = 'n',
+    mods = 'LEADER',
+    action = act.ActivateTabRelative(1),
+  },
+  {
+    key = 'p',
+    mods = 'LEADER',
+    action = act.ActivateTabRelative(-1),
+  },
+
+  -- Navigate to tab by number
+  {
+    key = '1',
+    mods = 'LEADER',
+    action = act.ActivateTab(0),
+  },
+  {
+    key = '2',
+    mods = 'LEADER',
+    action = act.ActivateTab(1),
+  },
+  {
+    key = '3',
+    mods = 'LEADER',
+    action = act.ActivateTab(2),
+  },
+  {
+    key = '4',
+    mods = 'LEADER',
+    action = act.ActivateTab(3),
+  },
+  {
+    key = '5',
+    mods = 'LEADER',
+    action = act.ActivateTab(4),
   },
 }
 
