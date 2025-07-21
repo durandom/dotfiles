@@ -64,3 +64,4 @@ _load_settings "$HOME/.zsh/configs"
 
 # show the profiler output
 # zprof
+alias claude="/Users/mhild/.claude/local/claude"

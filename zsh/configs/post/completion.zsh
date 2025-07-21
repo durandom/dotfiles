@@ -121,3 +121,14 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # make sure completion works for g command the same way as git
 compdef g=git
+
+# Fix completions for uv run.
+# https://github.com/astral-sh/uv/issues/8432#issuecomment-2867318195
+_uv_run_mod() {
+    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+        _arguments '*:filename:_files'
+    else
+        _uv "$@"
+    fi
+}
+compdef _uv_run_mod uv

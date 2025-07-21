@@ -1,4 +1,7 @@
 {
+  "cleanupPeriodDays": 365,
+  "env": {},
+  "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
       "Bash(npm run lint)",
@@ -8,6 +11,5 @@
       "Bash(curl:*)"
     ]
   },
-  "env": {
-  }
+  "model": "sonnet"
 }

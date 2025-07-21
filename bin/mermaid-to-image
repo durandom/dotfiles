@@ -1,0 +1,113 @@
+#!/bin/bash
+
+# mermaid-to-image Usage for Presentations
+
+# mermaid-to-image converts Mermaid diagram code to images and copies them to clipboard or saves to file:
+
+# Basic Usage:
+# echo "graph TD; A-->B" | mermaid-to-image
+
+# Options:
+# - Default: PNG format copied to clipboard
+# - --format svg or -f svg for SVG output
+# - --format png or -f png for PNG output (default)
+# - --output filename or -o filename to save to file instead of clipboard
+
+# Examples:
+# # Default: PNG to clipboard
+# cat diagram.mmd | mermaid-to-image
+
+# # Save PNG to file
+# cat diagram.mmd | mermaid-to-image --output diagram.png
+
+# # Save SVG to file
+# cat diagram.mmd | mermaid-to-image --format svg --output diagram.svg
+
+# For presentations: When describing graphics in presentation files, Claude can generate Mermaid code and suggest running it through mermaid-to-image to create the actual diagrams. The resulting images
+# can then be pasted directly into presentation tools or saved as files for later use.
+
+set -euo pipefail
+
+# Default format and output mode
+FORMAT="png"
+OUTPUT_FILE=""
+
+# Parse args
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -f|--format)
+      FORMAT="$2"
+      shift 2
+      ;;
+    -o|--output)
+      OUTPUT_FILE="$2"
+      shift 2
+      ;;
+    *)
+      echo "Usage: $0 [--format svg|png] [--output filename]"
+      echo "  --format: Output format (svg or png, default: png)"
+      echo "  --output: Save to file instead of clipboard"
+      exit 1
+      ;;
+  esac
+done
+
+# Create unique temp files
+TMP_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
+MMD_FILE="/tmp/diagram-${TMP_UUID}.mmd"
+SVG_FILE="/tmp/diagram-${TMP_UUID}.svg"
+PNG_FILE="/tmp/diagram-${TMP_UUID}.png"
+
+# Check for piped input
+if [ -t 0 ]; then
+  echo "❌ No Mermaid code provided via stdin."
+  echo "Usage: cat my.mmd | $0 [--format svg|png] [--output filename]"
+  echo "  --format: Output format (svg or png, default: png)"
+  echo "  --output: Save to file instead of clipboard"
+  exit 1
+fi
+
+# Read Mermaid from stdin
+cat > "$MMD_FILE"
+
+# Generate SVG from Mermaid
+mmdc -i "$MMD_FILE" -o "$SVG_FILE" -t forest
+
+if [[ "$FORMAT" == "svg" ]]; then
+  if [[ -n "$OUTPUT_FILE" ]]; then
+    cp "$SVG_FILE" "$OUTPUT_FILE"
+    echo "✅ SVG saved to $OUTPUT_FILE"
+  else
+    pbcopy < "$SVG_FILE"
+    echo "✅ SVG copied to clipboard."
+  fi
+elif [[ "$FORMAT" == "png" ]]; then
+  # Convert SVG to PNG using qlmanage
+  qlmanage -t -s 1024 -o /tmp "$SVG_FILE" > /dev/null 2>&1
+  CONVERTED="/tmp/$(basename "$SVG_FILE").png"
+
+  if [[ -f "$CONVERTED" ]]; then
+    cp "$CONVERTED" "$PNG_FILE"
+
+    if [[ -n "$OUTPUT_FILE" ]]; then
+      cp "$PNG_FILE" "$OUTPUT_FILE"
+      echo "✅ PNG saved to $OUTPUT_FILE"
+    else
+      # Copy image to clipboard using AppleScript
+      osascript <<EOF
+tell application "Finder"
+    set theFile to POSIX file "$PNG_FILE" as alias
+    set the clipboard to (read theFile as JPEG picture)
+end tell
+EOF
+
+      echo "✅ PNG copied to clipboard."
+    fi
+  else
+    echo "❌ Failed to convert SVG to PNG via qlmanage."
+    exit 1
+  fi
+else
+  echo "❌ Unsupported format: $FORMAT"
+  exit 1
+fi

@@ -163,19 +163,19 @@ local rh_mailing_list(name, label = '') =
         labels: [ "_tracker/gh" ]
       }
     },
-    {
-      filter: {
-        and: [
-          { list: "(.github.com)" },
-          { to: "-mention@noreply.github.com" },
-        ]
-      },
-      actions: {
-        archive: false,
-        markSpam: false,
-        labels: [ "_tracker/gh" ]
-      }
-    },
+    // {
+    //   filter: {
+    //     and: [
+    //       { list: "(.github.com)" },
+    //       { to: "-mention@noreply.github.com" },
+    //     ]
+    //   },
+    //   actions: {
+    //     archive: false,
+    //     markSpam: false,
+    //     labels: [ "_tracker/gh" ]
+    //   }
+    // },
     {
       filter: { list: "kubeflow-discuss.googlegroups.com" },
       actions: { labels: [ "kubeflow-discuss" ] }

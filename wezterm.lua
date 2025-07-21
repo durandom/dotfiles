@@ -132,8 +132,8 @@ config.keys = {
     action = wezterm.action.SendString('\x1b\x66'), -- ESC+f
   },
   {
-    key = '>',
-    mods = 'CTRL|SHIFT',
+    key = '.',
+    mods = 'LEADER',
     action = act.PromptInputLine {
       description = 'Enter new name for tab',
     --   initial_value = 'My Tab Name',
@@ -290,6 +290,15 @@ config.keys = {
     key = '5',
     mods = 'LEADER',
     action = act.ActivateTab(4),
+  },
+
+  -- Break pane to new tab (like tmux's break-pane)
+  {
+    key = 'b',
+    mods = 'LEADER',
+    action = wezterm.action_callback(function(window, pane)
+      pane:move_to_new_tab()
+    end),
   },
 
   -- Plugin management
