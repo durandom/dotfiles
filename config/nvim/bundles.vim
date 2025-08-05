@@ -1,0 +1,72 @@
+if &compatible
+  set nocompatible
+end
+
+" Shim command and function to allow migration from Vundle to vim-plug.
+function! VundleToPlug(vundle_command, arg, ...)
+  echom "You are using Vundle's `".a:vundle_command."` command to declare plugins. Dotfiles now uses vim-plug for plugin management. Please rename uses of `".a:vundle_command."` to `Plug`. Plugin was '".a:arg."'."
+  let vim_plug_options = {}
+
+  if a:0 > 0
+    if has_key(a:1, 'name')
+      let name = a:1.name
+      let vim_plug_options.dir = "$HOME/.local/share/nvim/plugged/".a:1.name
+    endif
+
+    if has_key(a:1, 'rtp')
+      let vim_plug_options.rtp = a:1.rtp
+    endif
+  endif
+
+  Plug a:arg, vim_plug_options
+endfunction
+
+com! -nargs=+  -bar Plugin call VundleToPlug("Plugin", <args>)
+com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+" Define bundles via Github repos
+" Plug 'christoomey/vim-run-interactive'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
+" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+" Plug 'Dkendal/fzy-vim'
+Plug 'fatih/vim-go'
+" Plug 'janko-m/vim-test'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'pbrisbin/vim-mkdir'
+" Plug 'scrooloose/syntastic'
+" Plug 'slim-template/vim-slim'
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-rake'
+Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/tComment'
+" Plug 'thoughtbot/vim-rspec'
+" Plug 'tpope/vim-dispatch'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/vim-auto-save'
+let g:auto_save = 1 " enable AutoSave on Vim startup
+" Plug 'vim-scripts/textobj-user'
+" Plug 'vim-scripts/textobj-rubyblock'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'hashivim/vim-terraform'
+
+if filereadable(expand("~/.config/nvim/bundles.local.vim"))
+  source ~/.config/nvim/bundles.local.vim
+endif
+
+call plug#end()

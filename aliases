@@ -19,6 +19,9 @@ if is_linux; then
   alias vi='vimx'
   alias vim='vimx'
   alias pbcopy='xclip -selection c'
+else
+  alias vi='nvim'
+  alias vim='nvim'
 fi
 
 # container aliases

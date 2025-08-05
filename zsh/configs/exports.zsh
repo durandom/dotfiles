@@ -12,10 +12,9 @@ export LESSCHARSET='utf-8'
 
 # editor
 # https://github.com/mhinz/neovim-remote#typical-use-cases
-# nvim seems broken
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
-export GIT_EDITOR='vim +startinsert'
+export GIT_EDITOR='nvim +startinsert'
 # https://www.gnupg.org/(it)/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
 

@@ -313,6 +313,16 @@ config.keys = {
   },
 }
 
+-- Mouse bindings
+config.mouse_bindings = {
+  -- Opt-click will open the link under the mouse cursor
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'OPT',
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+}
+
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 function get_appearance()

@@ -14,6 +14,9 @@ if [[ -f $HOME_BREW/bin/brew ]]; then
   eval "$($HOME_BREW/bin/brew shellenv)"
 fi
 
+# fnm - load before other PATH modifications to ensure fnm's node takes precedence
+eval "$(fnm env --use-on-cd --shell zsh)"
+
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 # PATH="/opt/homebrew/opt/node@16/bin:$PATH"
@@ -29,13 +32,13 @@ fi
 
 # Python
 # check if pyenv is available
-if command -v pyenv >/dev/null; then
-  eval "$(pyenv init -)"
-fi
+# if command -v pyenv >/dev/null; then
+#   eval "$(pyenv init -)"
+# fi
 # eval "$(pyenv virtualenv-init -)"
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
+# export NVM_DIR="$HOME/.nvm"
 
 # KREW
 PATH="${PATH}:${HOME}/.krew/bin"
