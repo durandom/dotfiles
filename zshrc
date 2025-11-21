@@ -64,6 +64,3 @@ _load_settings "$HOME/.zsh/configs"
 
 # show the profiler output
 # zprof
-
-# add ~/.zfunc to fpath (compinit is deferred in zsh/configs/post/completion.zsh)
-fpath+=~/.zfunc

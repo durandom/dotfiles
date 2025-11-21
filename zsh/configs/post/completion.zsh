@@ -73,14 +73,9 @@ if is_linux; then
     export EMOJI_CLI_FILTER=peco
 fi
 
-# load our own completion functions
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share/zsh/site-functions $fpath)
+# compinit is initialized in pre/compinit.zsh (before sheldon/fzf-tab loads)
 
-
-# init completion
-zsh-defer compinit -u
-
-# defer tool completions until after compinit runs
+# defer tool completions to speed up startup (they spawn external processes)
 if [ $commands[jira] ]; then
   zsh-defer -c 'source <(jira completion zsh)'
 fi
@@ -95,6 +90,21 @@ if [ $commands[oc] ]; then
 fi
 if [ $commands[kam] ]; then
   zsh-defer -c 'source <(kam completion zsh)'
+fi
+
+# argcomplete-based completions for Python tools (nox, pipx, etc.)
+# requires: pip install argcomplete  OR  uv tool install argcomplete
+# Note: global activation (activate-global-python-argcomplete) is interactive
+# and modifies .zshenv, so we use per-command registration instead.
+if [ $commands[register-python-argcomplete] ]; then
+  autoload -U bashcompinit && bashcompinit
+  # defer the actual registration to speed up startup (spawns Python)
+  [ $commands[nox] ] && zsh-defer -c 'eval "$(register-python-argcomplete nox)"'
+  # add more as needed:
+  # [ $commands[pipx] ] && zsh-defer -c 'eval "$(register-python-argcomplete pipx)"'
+else
+  echo "[zsh] argcomplete not found - install for nox/pipx completions:"
+  echo "      pip install argcomplete  OR  uv tool install argcomplete"
 fi
 
 # nvm
