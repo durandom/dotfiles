@@ -80,8 +80,9 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /opt/homebrew/share
 # init completion
 zsh-defer compinit -u
 
+# defer tool completions until after compinit runs
 if [ $commands[jira] ]; then
-  source <(jira completion zsh)
+  zsh-defer -c 'source <(jira completion zsh)'
 fi
 
 # aws
@@ -90,10 +91,10 @@ fi
 # source <(kubectl completion zsh)
 # if oc is available, load its completion
 if [ $commands[oc] ]; then
-  source <(oc completion zsh)
+  zsh-defer -c 'source <(oc completion zsh)'
 fi
 if [ $commands[kam] ]; then
-  source <(kam completion zsh)
+  zsh-defer -c 'source <(kam completion zsh)'
 fi
 
 # nvm
@@ -120,7 +121,7 @@ fi
 eval "$(zoxide init zsh --cmd cd)"
 
 # make sure completion works for g command the same way as git
-compdef g=git
+zsh-defer compdef g=git
 
 # Fix completions for uv run.
 # https://github.com/astral-sh/uv/issues/8432#issuecomment-2867318195
@@ -131,4 +132,4 @@ _uv_run_mod() {
         _uv "$@"
     fi
 }
-compdef _uv_run_mod uv
+zsh-defer compdef _uv_run_mod uv
