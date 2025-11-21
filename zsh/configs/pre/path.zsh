@@ -14,8 +14,15 @@ if [[ -f $HOME_BREW/bin/brew ]]; then
   eval "$($HOME_BREW/bin/brew shellenv)"
 fi
 
+# Volta - JavaScript tool manager (load before fnm to ensure volta takes precedence)
+export VOLTA_HOME="$HOME/.volta"
+PATH="$VOLTA_HOME/bin:$PATH"
+
 # fnm - load before other PATH modifications to ensure fnm's node takes precedence
 eval "$(fnm env --use-on-cd --shell zsh)"
+
+# bun
+PATH="$HOME/.bun/bin:$PATH"
 
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"

@@ -155,3 +155,4 @@
 	colorMoved = zebra
 # [url "git@github.com:"]
 # 	insteadOf = https://github.com/
+[protocol "file"]

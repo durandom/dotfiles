@@ -6,7 +6,7 @@ export CLICOLOR=1
 # Pager
 export PAGER=less
 # Less status line
-export LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+export LESS='--quit-if-one-screen --RAW-CONTROL-CHARS -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
 export LESSCHARSET='utf-8'
 #export LESSOPEN='|pygmentize -g %s'
 
@@ -59,3 +59,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 zle -N zle-keymap-select
 
 # export AICHAT_LOG_LEVEL=debug
+
+# Python Cache
+export PYTHONPYCACHEPREFIX=$HOME/.pycache_global

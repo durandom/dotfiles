@@ -59,9 +59,9 @@ wezterm.on('bell', function(window, pane)
 
   -- Check if audible bell should be enabled for this process
   local enable_audible_for = {
-    ["claude"] = "Claude Code session alert",
-    ["pane_title:claude"] = "Claude Code pane alert",  -- Match pane title containing "claude"
-    ["process_info:claude"] = "Claude Code process alert", -- Match process args containing "claude"
+    -- ["claude"] = "Claude Code session alert",
+    -- ["pane_title:claude"] = "Claude Code pane alert",  -- Match pane title containing "claude"
+    -- ["process_info:claude"] = "Claude Code process alert", -- Match process args containing "claude"
     -- Add more commands here as needed
   }
 
@@ -106,6 +106,10 @@ wezterm.on('bell', function(window, pane)
   end
   -- Visual bell will trigger for other commands via the config below
 end)
+
+-- umlaut
+-- https://github.com/wezterm/wezterm/issues/5569
+config.send_composed_key_when_left_alt_is_pressed = true
 
 -- This is where you actually apply your config choices
 config.font = wezterm.font 'DankMono Nerd Font'
@@ -292,6 +296,18 @@ config.keys = {
     action = act.ActivateTab(4),
   },
 
+  -- Move tabs left/right
+  {
+    key = 'LeftArrow',
+    mods = 'LEADER|SHIFT',
+    action = act.MoveTabRelative(-1),
+  },
+  {
+    key = 'RightArrow',
+    mods = 'LEADER|SHIFT',
+    action = act.MoveTabRelative(1),
+  },
+
   -- Break pane to new tab (like tmux's break-pane)
   {
     key = 'b',
@@ -315,11 +331,23 @@ config.keys = {
 
 -- Mouse bindings
 config.mouse_bindings = {
+  -- Change the default click behavior so that it only selects text and doesn't open hyperlinks
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'NONE',
+    action = act.CompleteSelection 'ClipboardAndPrimarySelection',
+  },
   -- Opt-click will open the link under the mouse cursor
   {
     event = { Up = { streak = 1, button = 'Left' } },
     mods = 'OPT',
     action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  -- Disable the 'Down' event of OPT-Click to avoid weird program behaviors
+  {
+    event = { Down = { streak = 1, button = 'Left' } },
+    mods = 'OPT',
+    action = act.Nop,
   },
 }
 
@@ -374,7 +402,12 @@ local schemes = {
     bluloco = {
         dark = "BlulocoDark", -- Common name. Config name might be 'bluloco_dark'.
         light = "BlulocoLight" -- Common name. Config name might be 'bluloco_light'.
-    }
+    },
+    catppuccin = {
+        dark = "Catppuccin Mocha", -- Common name. Config name might be 'catppuccin_mocha'.
+        light = "Catppuccin Latte" -- Common name. Config name might be 'catppuccin_latte'.
+        -- Notes: Other variants include 'Frappe', 'Macchiato', and 'Vanilla'.
+    },
 }
 
 function scheme_for_appearance(appearance)

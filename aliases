@@ -31,5 +31,7 @@ alias m4b-tool='docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/data kmluc
 alias rasa='docker run -it --rm -v $(pwd):/app khalosa/rasa-aarch64' # https://github.com/khalo-sa/rasa-apple-silicon
 alias opf='docker run -it --rm -v $(pwd):/app durandom/toolbox' # https://github.com/operate-first/toolbox
 
+alias claude="/Users/mhild/.local/state/fnm_multishells/82858_1759822968519/bin/claude"
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
