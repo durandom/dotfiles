@@ -1,0 +1,69 @@
+#!/bin/zsh
+# Selectively remove entries from zsh history matching a pattern
+
+set -e
+
+usage() {
+  cat <<EOF
+Usage: ${0:t} [options] <pattern>
+
+Remove entries from zsh history matching a pattern.
+
+Options:
+  -n, --dry-run    Show what would be removed without making changes
+  -i, --ignore-case  Case-insensitive matching
+  -h, --help       Show this help
+
+Examples:
+  ${0:t} -n 'secret'           # Preview lines containing 'secret'
+  ${0:t} -n '^curl.*token'     # Preview curl commands with token
+  ${0:t} 'password='           # Remove lines with password=
+EOF
+  exit "${1:-0}"
+}
+
+dry_run=false
+ignore_case=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -n|--dry-run) dry_run=true; shift ;;
+    -i|--ignore-case) ignore_case="-i"; shift ;;
+    -h|--help) usage 0 ;;
+    -*) echo "Unknown option: $1" >&2; usage 1 ;;
+    *) break ;;
+  esac
+done
+
+pattern="$1"
+[[ -z "$pattern" ]] && { echo "Error: pattern required" >&2; usage 1; }
+
+histfile="${HISTFILE:-$HOME/.zsh_history}"
+[[ -f "$histfile" ]] || { echo "Error: history file not found: $histfile" >&2; exit 1; }
+
+matches=$(grep -c $ignore_case -E "$pattern" "$histfile" 2>/dev/null || echo 0)
+
+if [[ "$matches" -eq 0 ]]; then
+  echo "No matches found for: $pattern"
+  exit 0
+fi
+
+echo "Found $matches matching entries"
+
+if $dry_run; then
+  echo "---"
+  grep -n $ignore_case -E "$pattern" "$histfile" | head -1000
+  [[ "$matches" -gt 1000 ]] && echo "... and $((matches - 1000)) more"
+  echo "---"
+  echo "Run without -n to remove these entries"
+else
+  backup="${histfile}.bak.$(date +%Y%m%d%H%M%S)"
+  cp "$histfile" "$backup"
+  echo "Backup created: $backup"
+
+  grep -v $ignore_case -E "$pattern" "$histfile" > "${histfile}.tmp"
+  mv "${histfile}.tmp" "$histfile"
+
+  echo "Removed $matches entries"
+  echo "Run 'fc -R' to reload history in current shell"
+fi
