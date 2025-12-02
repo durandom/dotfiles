@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -message \"Claude Code Permissions\" -sound default"
+            "command": "ccn -t vscode"
           }
         ]
       }
@@ -24,7 +24,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -message \"Claude Code Finished\" -sound default"
+            "command": "ccn -t vscode"
           }
         ]
       }
@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -message \"Claude Code Needs Help\" -sound Basso"
+            "command": "ccn -t vscode"
           }
         ]
       }
@@ -46,7 +46,7 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1754033995116
   }
