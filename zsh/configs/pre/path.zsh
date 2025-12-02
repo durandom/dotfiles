@@ -24,6 +24,9 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 # bun
 PATH="$HOME/.bun/bin:$PATH"
 
+# Cargo (Rust)
+PATH="$HOME/.cargo/bin:$PATH"
+
 PATH="$HOME/opt/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 # PATH="/opt/homebrew/opt/node@16/bin:$PATH"
