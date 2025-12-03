@@ -421,6 +421,16 @@ end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
+-- Sync Claude Code theme when system appearance changes
+wezterm.on('window-config-reloaded', function(window, pane)
+  local appearance = window:get_appearance()
+  local claude_theme = appearance:find('Dark') and 'dark' or 'light'
+  wezterm.background_child_process({
+    'claude-theme',
+    claude_theme
+  })
+end)
+
 -- tab bar settings
 -- It is important that the apply_to_config-function is called after color_scheme has been set.
 -- config.tab_bar_at_bottom = true

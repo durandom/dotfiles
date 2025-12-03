@@ -1,0 +1,88 @@
+#!/bin/bash
+# Set or toggle Claude Code theme
+# Usage: claude-theme [dark|light|toggle|auto]
+#
+# Note: In Claude Code, dark theme = no "theme" key (null/missing)
+#       light theme = "theme": "light"
+
+set -e
+
+CLAUDE_CONFIG="$HOME/.claude.json"
+
+usage() {
+  cat <<EOF
+Usage: ${0##*/} [dark|light|toggle|auto]
+
+Set Claude Code theme.
+
+Options:
+  dark    Set dark theme (removes theme key)
+  light   Set light theme
+  toggle  Toggle between dark and light
+  auto    Set based on macOS system appearance
+
+Without arguments, shows current theme.
+EOF
+  exit "${1:-0}"
+}
+
+get_current_theme() {
+  local theme
+  theme=$(jq -r '.theme // empty' "$CLAUDE_CONFIG")
+  if [[ -z "$theme" || "$theme" == "null" ]]; then
+    echo "dark"
+  else
+    echo "$theme"
+  fi
+}
+
+set_theme() {
+  local theme="$1"
+  local tmp
+  tmp=$(mktemp)
+
+  if [[ "$theme" == "dark" ]]; then
+    # Dark = remove theme key
+    jq 'del(.theme)' "$CLAUDE_CONFIG" > "$tmp" && mv "$tmp" "$CLAUDE_CONFIG"
+  else
+    # Light or other = set theme key
+    jq --arg t "$theme" '.theme = $t' "$CLAUDE_CONFIG" > "$tmp" && mv "$tmp" "$CLAUDE_CONFIG"
+  fi
+  echo "Theme set to: $theme"
+}
+
+get_system_appearance() {
+  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
+    echo "dark"
+  else
+    echo "light"
+  fi
+}
+
+case "${1:-}" in
+  -h|--help)
+    usage 0
+    ;;
+  dark|light)
+    set_theme "$1"
+    ;;
+  toggle)
+    current=$(get_current_theme)
+    if [[ "$current" == "dark" ]]; then
+      set_theme "light"
+    else
+      set_theme "dark"
+    fi
+    ;;
+  auto)
+    set_theme "$(get_system_appearance)"
+    ;;
+  "")
+    echo "Current theme: $(get_current_theme)"
+    echo "System appearance: $(get_system_appearance)"
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage 1
+    ;;
+esac
